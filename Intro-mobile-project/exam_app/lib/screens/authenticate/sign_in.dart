@@ -1,8 +1,10 @@
+import 'package:exam_app/screens/authenticate/register.dart';
 import 'package:flutter/material.dart';
 import 'package:exam_app/services/auth.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({ Key? key }) : super(key: key);
+  final Function toggleView;
+  SignIn({required this.toggleView});
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -11,31 +13,174 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
 
+  //from key
+  final _formkey = GlobalKey<FormState>();
+
+  // editing controller
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+  //text field state
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.brown[100],
-      appBar: AppBar(
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Sign in'),
-      ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical:20.0, horizontal: 50.0),
-        child: ElevatedButton (
-          child: Text('Sign in anon'),
-          onPressed: () async {
-            dynamic result = await _auth.signInAnon();
-            if(result == null){
-              print('ERROR sign in');
-            }
-            else{
-              print('Signed in');
-              print(result.uid);
-            }
+    //email
+    final emailField = TextFormField(
+      autofocus: false,
+      controller: emailController,
+      keyboardType: TextInputType.emailAddress,
+      //validator: () {},
+      onSaved: (value) {
+        emailController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
 
-          },
+    //password
+    final passwordField = TextFormField(
+      autofocus: false,
+      controller: passwordController,
+      obscureText: true,
+      //validator: () {},
+      onSaved: (value) {
+        passwordController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+          prefixIcon: Icon(Icons.lock),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Password",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
+
+    //button
+    final loginButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {},
+        child: Text(
+          "Login",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
-    ));
+      ),
+    );
+
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: SingleChildScrollView(
+              child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                          height: 200,
+                          child: Image.asset(
+                            "assets/apLogo.png",
+                            fit: BoxFit.contain,
+                          )),
+                      SizedBox(height: 45),
+                      emailField,
+                      SizedBox(height: 25),
+                      passwordField,
+                      SizedBox(height: 35),
+                      loginButton,
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Dont have an account? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Register()));
+                            },
+                            child: Text(
+                              "SignUp",
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
+            ),
+          )),
+        ));
+    // return Scaffold(
+    //   backgroundColor: Color.fromARGB(255, 252, 237, 238),
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.red[400],
+    //     elevation: 0.0,
+    //     title: Text('Sign in'),
+    //     actions: <Widget>[
+    //       FlatButton.icon(
+    //         icon: Icon(Icons.person),
+    //         label: Text('Register'),
+    //         onPressed: () {
+    //           widget.toggleView();
+    //         })
+    //     ],
+    //   ),
+    //   body: Container(
+    //     padding: EdgeInsets.symmetric(vertical:20.0, horizontal: 50.0),
+    //     child: Form(
+    //       key: _fromkey,
+    //       child: Column(
+    //         children: <Widget>[
+    //           SizedBox(height: 20.0),
+    //           TextFormField(
+    //             onChanged: (val) {
+    //               setState(() => email = val);
+    //             }
+    //           ),
+    //           SizedBox(height: 20.0),
+    //           TextFormField(
+    //             obscureText: true,
+    //             onChanged: (val) {
+    //               setState(() => password = val);
+
+    //             },
+    //           ),
+    //           SizedBox(height: 20.0),
+    //           ElevatedButton(
+    //                 child: Text('Sign in'),
+    //                 style: ButtonStyle(
+    //                     backgroundColor:
+    //                         MaterialStateProperty.all(Colors.pink[400]),
+    //                     textStyle: MaterialStateProperty.all(
+    //                         TextStyle(color: Colors.white))),
+    //                 onPressed: () async {
+    //                   if (_fromkey.currentState!.validate()){
+    //                     print(email);
+    //                     print(password);
+    //                   }
+    //                 },
+    //               )
+    //         ],
+    //       ),
+    //     )
+    // ));
   }
 }

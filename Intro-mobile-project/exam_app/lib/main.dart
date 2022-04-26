@@ -1,3 +1,6 @@
+import 'package:exam_app/screens/authenticate/register.dart';
+import 'package:exam_app/screens/authenticate/sign_in.dart';
+import 'package:exam_app/screens/home/home.dart';
 import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/models/my_user.dart';
