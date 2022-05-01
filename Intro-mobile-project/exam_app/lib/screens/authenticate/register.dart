@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/home/home.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -338,6 +339,7 @@ class _RegisterState extends State<Register> {
     MyUser myUser = MyUser();
     myUser.email = user!.email;
     myUser.uid = user.uid;
+    myUser.sNumber = sNumberEditingController.text;
     myUser.firstName = firstNameEditingController.text;
     myUser.lastName = lastNameEditingController.text;
 
@@ -348,6 +350,6 @@ class _RegisterState extends State<Register> {
         .set(myUser.toMap());
     Fluttertoast.showToast(msg: "Account created successfully!");
     Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(builder: (context) => Authenticate()), (route) => false);
   }
 }

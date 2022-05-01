@@ -6,7 +6,7 @@ class MyUser {
   String? email;
   String? firstName;
   String? lastName;
-  Bool? isAdmin;
+  bool? isAdmin;
 
   MyUser({this.uid, this.sNumber, this.email, this.firstName, this.lastName, this.isAdmin});
 
@@ -18,7 +18,7 @@ class MyUser {
       email: map['email'],
       firstName: map['firstName'],
       lastName: map['lastName'],
-      isAdmin: map['isAdmin']
+      isAdmin: map['isAdmin'],
     );
   }
 
