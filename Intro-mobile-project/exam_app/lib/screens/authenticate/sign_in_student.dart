@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SignIn extends StatefulWidget {
+class SignInStudent extends StatefulWidget {
   //final Function toggleView;
   //SignIn({required this.toggleView});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignInStudent> createState() => _SignInStudentState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignInStudentState extends State<SignInStudent> {
   //auth class
   //final AuthService _auth = AuthService();
 
@@ -40,10 +40,10 @@ class _SignInState extends State<SignIn> {
       keyboardType: TextInputType.emailAddress,
       // auth class
       validator: (value) {
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return "Please enter your email";
         }
-        if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
+        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
           return "Please enter a valid email";
         }
         return null;
@@ -66,10 +66,10 @@ class _SignInState extends State<SignIn> {
       obscureText: true,
       validator: (value) {
         RegExp regex = new RegExp(r'^.{6,}$');
-        if(value!.isEmpty){
+        if (value!.isEmpty) {
           return "Password is required";
         }
-        if(!regex.hasMatch(value)){
+        if (!regex.hasMatch(value)) {
           return "Please enter valid password, min 6 characters!";
         }
       },
@@ -93,7 +93,7 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          signIn(emailController.text, passwordController.text); 
+          signIn(emailController.text, passwordController.text);
         },
         child: Text(
           "Login",
@@ -103,6 +103,7 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -211,17 +212,18 @@ class _SignInState extends State<SignIn> {
   }
 
   //login function ->> auth class
-  void signIn(String email, String password) async{
-    if(_formkey.currentState!.validate()){
+  void signIn(String email, String password) async {
+    if (_formkey.currentState!.validate()) {
       await _auth
-      .signInWithEmailAndPassword(email: email, password: password)
-      .then((uid) => {
-        Fluttertoast.showToast(msg: "Login Successful!"),
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Home())),
-      }).catchError((e){
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful!"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Home())),
+              })
+          .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
     }
   }
-  
 }

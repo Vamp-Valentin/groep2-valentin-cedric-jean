@@ -1,18 +1,24 @@
+import 'dart:ffi';
+
 class MyUser {
   String? uid;
+  String? sNumber;
   String? email;
   String? firstName;
   String? lastName;
+  Bool? isAdmin;
 
-  MyUser({this.uid, this.email, this.firstName, this.lastName});
+  MyUser({this.uid, this.sNumber, this.email, this.firstName, this.lastName, this.isAdmin});
 
   //get data from database
   factory MyUser.fromMap(map){
     return MyUser(
       uid: map['uid'],
+      sNumber: map['sNumber'],
       email: map['email'],
       firstName: map['firstName'],
-      lastName: map['lastName']
+      lastName: map['lastName'],
+      isAdmin: map['isAdmin']
     );
   }
 
@@ -20,9 +26,11 @@ class MyUser {
   Map<String, dynamic> toMap(){
     return {
       'uid': uid,
+      'sNumber': sNumber,
       'email': email,
       'firstName': firstName,
-      'lastName': lastName
+      'lastName': lastName,
+      'isAdmin': isAdmin,
     };
   }
 }
