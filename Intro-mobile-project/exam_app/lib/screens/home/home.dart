@@ -1,3 +1,4 @@
+import 'package:exam_app/screens/authenticate/sign_in.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,9 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.red,
         title: Text("Welcome"),
         centerTitle: true,
-        actions: <Widget>[ActionChip(label: Text("Logout"), onPressed: (){})],
+        actions: <Widget>[ActionChip(label: Text("Logout"), onPressed: (){
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignIn()));
+        })],
       ),
       body: Center(
         child: Padding(

@@ -1,5 +1,6 @@
 import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
+import 'package:exam_app/screens/authenticate/sign_in.dart';
 import 'package:exam_app/screens/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class Wrapper extends StatelessWidget {
     
     // return home or authenticate widget
     if(user == null){
-      return Authenticate();
+      return SignIn();
     } else {
       return Home();
     }
