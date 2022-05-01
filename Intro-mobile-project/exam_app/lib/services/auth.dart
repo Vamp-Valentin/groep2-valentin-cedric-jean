@@ -1,5 +1,7 @@
 import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/screens/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthService{
     //final -> cannot change, _fire -> private
@@ -28,7 +30,8 @@ class AuthService{
   }
   
   //sign in with email & password
-
+   // login function
+   
   //register with email & password
 
   // sign out 

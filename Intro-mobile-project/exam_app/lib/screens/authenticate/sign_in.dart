@@ -1,4 +1,5 @@
 import 'package:exam_app/screens/authenticate/register.dart';
+import 'package:exam_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:exam_app/services/auth.dart';
 
@@ -68,7 +69,9 @@ class _SignInState extends State<SignIn> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+        },
         child: Text(
           "Login",
           textAlign: TextAlign.center,
@@ -183,4 +186,5 @@ class _SignInState extends State<SignIn> {
     //     )
     // ));
   }
+  
 }
