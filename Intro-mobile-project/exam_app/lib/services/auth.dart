@@ -1,5 +1,4 @@
 import 'package:exam_app/models/my_user.dart';
-import 'package:exam_app/screens/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

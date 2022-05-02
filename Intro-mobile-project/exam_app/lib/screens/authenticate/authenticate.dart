@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/authenticate/register.dart';
+import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/screens/authenticate/sign_in_student.dart';
-import 'package:exam_app/screens/home/home.dart';
+import 'package:exam_app/screens/students/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,14 +17,6 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-  // final _auth = FirebaseAuth.instance;
-  // User? user = FirebaseAuth.instance.currentUser;
-  // MyUser loggedInUser = MyUser();
-  // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  // bool showSignIn = true;
-  // void toggleView(){
-  //   setState(() => showSignIn = !showSignIn);
-  // }
   User? user = FirebaseAuth.instance.currentUser;
   MyUser loggedInUser = MyUser();
 
@@ -41,6 +34,9 @@ class _AuthenticateState extends State<Authenticate> {
 
   @override
   Widget build(BuildContext context) {
+    if (loggedInUser.email == null){
+      return defaultLoginPage();
+    }
     if (loggedInUser.isAdmin == true) {
       return HomeAdmin();
     } 

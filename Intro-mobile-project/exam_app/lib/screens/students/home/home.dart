@@ -17,7 +17,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Authenticate authenticate = new Authenticate();
   User? user = FirebaseAuth.instance.currentUser;
   MyUser loggedInUser = MyUser();
 
@@ -96,7 +95,7 @@ class _HomeState extends State<Home> {
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => defaultLoginPage()));
+        MaterialPageRoute(builder: (context) => SignInStudent()));
   }
 }
 // class Home extends StatelessWidget {
