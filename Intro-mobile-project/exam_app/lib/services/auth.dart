@@ -46,7 +46,7 @@ class AuthService{
     }
   }
 
-  //   postDetailsToFirestore() async {
+  //   postExamDetailsToFirestore() async {
   //   //calling fire store
   //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   //   User? user = _auth.currentUser;
