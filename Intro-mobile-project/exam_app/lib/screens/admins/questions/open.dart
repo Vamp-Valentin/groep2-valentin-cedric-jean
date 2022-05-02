@@ -15,8 +15,6 @@ class _OpenState extends State<Open> {
 
   @override
   Widget build(BuildContext context) {
-    //final exam = ModalRoute.of(context)!.settings.arguments as MyExam;
-    //exam Name
     final openQuestionField = TextFormField(
       autofocus: false,
       controller: openQuestionEditingController,

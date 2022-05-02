@@ -1,5 +1,6 @@
 import 'package:exam_app/screens/authenticate/register.dart';
 import 'package:exam_app/screens/authenticate/sign_in_student.dart';
+import 'package:exam_app/screens/students/location/location.dart';
 import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/models/my_user.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().user,
       child: MaterialApp(
-        home: const Wrapper(),
+        //home: const Wrapper(),
+        home: LocationWidget(),
       ),
     );
   }

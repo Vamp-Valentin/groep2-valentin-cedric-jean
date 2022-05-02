@@ -3,7 +3,7 @@ import 'dart:ffi';
 class MyExam {
   String? uid;
   String? examName;
-  String? openQuestion;
+  List<String>? openQuestion;
   String? students;
 
   MyExam({this.uid, this.examName, this.openQuestion, this.students});
