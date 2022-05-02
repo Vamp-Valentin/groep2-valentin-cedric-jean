@@ -15,11 +15,18 @@ class defaultLoginPage extends StatefulWidget {
 
 class _defaultLoginPageState extends State<defaultLoginPage> with SingleTickerProviderStateMixin{
   late final TabController _tabController;
+
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

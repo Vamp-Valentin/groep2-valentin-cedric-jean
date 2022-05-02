@@ -5,8 +5,10 @@ import 'package:exam_app/screens/admins/questions/multiple_choice.dart';
 import 'package:exam_app/screens/admins/questions/open.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
 import 'package:exam_app/screens/admins/students/add_students.dart';
+import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/sign_in_admin.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
+import 'package:exam_app/screens/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -110,6 +112,6 @@ class _HomeAdminState extends State<HomeAdmin> {
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SignInAdmin()));
+        MaterialPageRoute(builder: (context) => defaultLoginPage()));
   }
 }

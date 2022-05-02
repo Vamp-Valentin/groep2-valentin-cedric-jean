@@ -20,7 +20,7 @@ class _RegisterState extends State<Register> {
   final _auth = FirebaseAuth.instance;
 
   //form key
-  final _formkey = GlobalKey<FormState>();
+  //final _formkey = GlobalKey<FormState>();
 
   // editing controller
   final sNumberEditingController = new TextEditingController();
@@ -191,7 +191,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          signUp(emailEditingController.text, passwordEditingController.text);
+          //signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: Text(
           "SignUp",
@@ -221,7 +221,7 @@ class _RegisterState extends State<Register> {
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
-                  key: _formkey,
+                  //key: _formkey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -318,16 +318,16 @@ class _RegisterState extends State<Register> {
     // ));
   }
 
-  void signUp(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-  }
+  // void signUp(String email, String password) async {
+  //   if (_formkey.currentState!.validate()) {
+  //     await _auth
+  //         .createUserWithEmailAndPassword(email: email, password: password)
+  //         .then((value) => {postDetailsToFirestore()})
+  //         .catchError((e) {
+  //       Fluttertoast.showToast(msg: e!.message);
+  //     });
+  //   }
+  // }
 
   postDetailsToFirestore() async {
     //calling fire store

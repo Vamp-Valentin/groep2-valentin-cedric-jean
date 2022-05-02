@@ -34,13 +34,16 @@ class _AuthenticateState extends State<Authenticate> {
 
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser.email == null){
+    if (loggedInUser.uid == null){
+      debugPrint("defaultLoginPage in authenticate class");
       return defaultLoginPage();
     }
-    if (loggedInUser.isAdmin == true) {
+    if (loggedInUser.isAdmin == true && loggedInUser.uid != null) {
+      debugPrint("homePageAdmin in authenticate class");
       return HomeAdmin();
     } 
     else {
+    debugPrint("homePage in authenticate class");
      return Home();
     }
     }

@@ -5,6 +5,7 @@ import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/sign_in_student.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
+import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class _HomeState extends State<Home> {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
         //MaterialPageRoute(builder: (context) => defaultLoginPage()));
-        MaterialPageRoute(builder: (context) => SignInStudent()));
+        MaterialPageRoute(builder: (context) => Authenticate()));
   }
 }
 // class Home extends StatelessWidget {

@@ -4,6 +4,7 @@ import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/register.dart';
 import 'package:exam_app/screens/students/dropdown/student_dropdown.dart';
+import 'package:exam_app/screens/students/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:exam_app/services/auth.dart';
@@ -22,7 +23,7 @@ class _SignInStudentState extends State<SignInStudent> {
   //final AuthService _auth = AuthService();
 
   //from key
-  final _formkey = GlobalKey<FormState>();
+  //final _formkey = GlobalKey<FormState>();
 
   // editing controller
   final TextEditingController emailController = new TextEditingController();
@@ -113,7 +114,7 @@ class _SignInStudentState extends State<SignInStudent> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          signIn(emailController.text, passwordController.text);
+          //signIn(emailController.text, passwordController.text);
         },
         child: Text(
           "Login",
@@ -123,12 +124,13 @@ class _SignInStudentState extends State<SignInStudent> {
         ),
       ),
     );
-      return MaterialApp(
-      home: Scaffold(
-        // body: const Center(
-        //   child: MyStatefulWidget(),
-        // ),
+
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: StudentDropdown(),
     );
     // return Scaffold(
     //     backgroundColor: Colors.white,
@@ -237,18 +239,18 @@ class _SignInStudentState extends State<SignInStudent> {
   }
 
   //login function ->> auth class
-  void signIn(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful!"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Authenticate())),
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-  }
+  // void signIn(String email, String password) async {
+  //   if (_formkey.currentState!.validate()) {
+  //     await _auth
+  //         .signInWithEmailAndPassword(email: email, password: password)
+  //         .then((uid) => {
+  //               Fluttertoast.showToast(msg: "Login Successful!"),
+  //               Navigator.of(context).pushReplacement(
+  //                   MaterialPageRoute(builder: (context) => Home())),
+  //             })
+  //         .catchError((e) {
+  //       Fluttertoast.showToast(msg: e!.message);
+  //     });
+  //   }
+  // }
 }

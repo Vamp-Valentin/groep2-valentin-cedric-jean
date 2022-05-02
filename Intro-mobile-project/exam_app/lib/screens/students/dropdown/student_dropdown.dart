@@ -4,16 +4,16 @@ import 'package:exam_app/models/my_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+class StudentDropdown extends StatefulWidget {
+  StudentDropdown({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _StudentDropdownState createState() => _StudentDropdownState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _StudentDropdownState extends State<StudentDropdown> {
   var students, carMakeModel;
   var setDefaultMake = true, setDefaultMakeModel = true;
   User? user = FirebaseAuth.instance.currentUser;
@@ -64,11 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       students = snapshot.data!.docs[0].get('students');
                       debugPrint('setDefault make: $students');
                       final splitstudents = students?.split(';');
+                      if(splitstudents != null){
                       for (int i = 0; i < splitstudents.length; i++) {
                         splitList.add(splitstudents?[i]);
                         debugPrint(splitList[i]);
                       }
-                      student = splitList[0];
+                      student = splitList[0];}
                     }
                     for (var item in splitList) {
                       String currency = item;
@@ -101,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
             ),
           ),
+          Text(student),
         ],
       ),
     );

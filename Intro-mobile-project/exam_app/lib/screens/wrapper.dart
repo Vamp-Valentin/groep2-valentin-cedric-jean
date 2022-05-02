@@ -18,10 +18,16 @@ class Wrapper extends StatelessWidget {
 
     
     // return home or authenticate widget
-    if(user == null){
-      return Authenticate();
-    } else {
-      return Home();
-    }
+    // if(user == null){
+    //   debugPrint("Authenticate");
+    //   return Authenticate();
+    // } else {
+    //   debugPrint("home");
+    //   return Home();
+
+    // }
+    debugPrint("Authenticate in wrapper class");
+    return Authenticate();
+    
   }
 }

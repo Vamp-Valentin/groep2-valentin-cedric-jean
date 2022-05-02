@@ -1,3 +1,4 @@
+import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -93,7 +94,8 @@ class _SignInAdminState extends State<SignInAdmin> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          signIn(emailController.text, passwordController.text);
+          //signIn(emailController.text, passwordController.text);
+          signIn("test@ap.be", "Test123");
         },
         child: Text(
           "Login",
@@ -165,7 +167,7 @@ class _SignInAdminState extends State<SignInAdmin> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful!"),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Authenticate())),
+                    MaterialPageRoute(builder: (context) => HomeAdmin())),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
