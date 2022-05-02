@@ -4,8 +4,9 @@ class MyExam {
   String? uid;
   String? examName;
   String? openQuestion;
+  String? students;
 
-  MyExam({this.uid, this.examName, this.openQuestion});
+  MyExam({this.uid, this.examName, this.openQuestion, this.students});
 
   //get data from database
   factory MyExam.fromMap(map){
@@ -13,6 +14,7 @@ class MyExam {
       uid: map['uid'],
       examName: map['examName'],
       openQuestion: map['openQuestion'],
+      students: map['students'],
     );
   }
 
@@ -22,6 +24,7 @@ class MyExam {
       'uid': uid,
       'examName': examName,
       'openQuestion': openQuestion,
+      'students': students,
     };
   }
 }

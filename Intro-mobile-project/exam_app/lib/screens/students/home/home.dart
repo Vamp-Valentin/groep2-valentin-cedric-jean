@@ -95,6 +95,7 @@ class _HomeState extends State<Home> {
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
+        //MaterialPageRoute(builder: (context) => defaultLoginPage()));
         MaterialPageRoute(builder: (context) => SignInStudent()));
   }
 }

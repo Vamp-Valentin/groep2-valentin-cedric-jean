@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exam_app/models/my_exam.dart';
 import 'package:exam_app/models/my_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthService{
     //final -> cannot change, _fire -> private
@@ -42,4 +45,24 @@ class AuthService{
       return null;
     }
   }
+
+  //   postDetailsToFirestore() async {
+  //   //calling fire store
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   User? user = _auth.currentUser;
+
+  //   //calling user model
+  //   MyExam myExam = MyExam();
+  //   myExam.uid = user!.uid;
+  //   myExam.students = addStudentsEditingController.text;
+
+  //   //sending values
+  //   await firebaseFirestore
+  //       .collection("exams")
+  //       .doc(user.uid)
+  //       .set(myExam.toMap());
+  //   Fluttertoast.showToast(msg: "Students added successfully!");
+  //   Navigator.pushAndRemoveUntil((context),
+  //       MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
+  // }
 }

@@ -1,43 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_exam.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class Open extends StatefulWidget {
-  Open({Key? key}) : super(key: key);
+class AddStudent extends StatefulWidget {
+  AddStudent({Key? key}) : super(key: key);
 
   @override
-  State<Open> createState() => _OpenState();
+  State<AddStudent> createState() => _AddStudentState();
 }
 
-class _OpenState extends State<Open> {
-  final openQuestionEditingController = new TextEditingController();
-
+class _AddStudentState extends State<AddStudent> {
+  final addStudentsEditingController = new TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    //final exam = ModalRoute.of(context)!.settings.arguments as MyExam;
-    //exam Name
-    final openQuestionField = TextFormField(
+
+    final addStudentsField = TextFormField(
       autofocus: false,
-      controller: openQuestionEditingController,
+      controller: addStudentsEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
-        RegExp regex = new RegExp(r'^.{2,}$');
+        RegExp regex = new RegExp(r'^.{5,}$');
         if (value!.isEmpty) {
-          return "Question is required!";
+          return "S-Number is required!";
         }
         if (!regex.hasMatch(value)) {
-          return "Please enter valid question!";
+          return "Please enter valid student!";
         }
         return null;
       },
       onSaved: (value) {
-        openQuestionEditingController.text = value!;
+        addStudentsEditingController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Question...",
+          contentPadding: EdgeInsets.fromLTRB(20, 80, 20, 80),
+          hintText: "S-numbers, separated with ';' ",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 
@@ -50,11 +52,7 @@ class _OpenState extends State<Open> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainQuestions()),
-          );
+          postDetailsToFirestore();
         },
         child: Text(
           "save",
@@ -67,14 +65,8 @@ class _OpenState extends State<Open> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: Text("Open question"),
+          title: Text("Exams"),
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              ;
-            },
-          ),
         ),
         backgroundColor: Colors.white,
         body: Center(
@@ -89,14 +81,33 @@ class _OpenState extends State<Open> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  openQuestionField,
-                  SizedBox(height: 70),
+                  addStudentsField,
+                  SizedBox(height: 40),
                   saveButton,
-                  SizedBox(height: 25),
                 ],
               )),
             ),
           )),
         ));
+  }
+
+    postDetailsToFirestore() async {
+    //calling fire store
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    //calling user model
+    MyExam myExam = MyExam();
+    myExam.uid = user!.uid;
+    myExam.students = addStudentsEditingController.text;
+
+    //sending values
+    await firebaseFirestore
+        .collection("exams")
+        .doc(user.uid)
+        .set(myExam.toMap());
+    Fluttertoast.showToast(msg: "Students added successfully!");
+    Navigator.pushAndRemoveUntil((context),
+        MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
   }
 }

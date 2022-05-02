@@ -3,6 +3,8 @@ import 'package:exam_app/models/my_exam.dart';
 import 'package:exam_app/screens/admins/questions/code_correction.dart';
 import 'package:exam_app/screens/admins/questions/multiple_choice.dart';
 import 'package:exam_app/screens/admins/questions/open.dart';
+import 'package:exam_app/screens/admins/questions/question_home.dart';
+import 'package:exam_app/screens/admins/students/add_students.dart';
 import 'package:exam_app/screens/authenticate/sign_in_admin.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,35 +25,9 @@ class _HomeAdminState extends State<HomeAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    final MyExam exam;
-    //exam Name
-    final examNameField = TextFormField(
-      autofocus: false,
-      controller: examNameEditingController,
-      keyboardType: TextInputType.name,
-      validator: (value) {
-        RegExp regex = new RegExp(r'^.{2,}$');
-        if (value!.isEmpty) {
-          return "Question name is required!";
-        }
-        if (!regex.hasMatch(value)) {
-          return "Please enter valid question!";
-        }
-        return null;
-      },
-      onSaved: (value) {
-        examNameEditingController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Exam name",
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-    );
 
-    //open Question
-    final openQuestionButton = Material(
+    //exam button
+    final examButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.redAccent,
@@ -60,10 +36,10 @@ class _HomeAdminState extends State<HomeAdmin> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Open()));
+              MaterialPageRoute(builder: (context) => MainQuestions()));
         },
         child: Text(
-          "Open Question",
+          "Exams",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -71,8 +47,8 @@ class _HomeAdminState extends State<HomeAdmin> {
       ),
     );
 
-    //multiple choise question
-    final multipleChoiseQuestionButton = Material(
+    //students button
+    final studentButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
       color: Colors.redAccent,
@@ -81,50 +57,10 @@ class _HomeAdminState extends State<HomeAdmin> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => MultipleChoice()));
+              MaterialPageRoute(builder: (context) => AddStudent()));
         },
         child: Text(
-          "Multiple choise question",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-
-    //multiple choise question
-    final codeCorrectionQuestionButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
-      child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => CodeCorrection()));
-        },
-        child: Text(
-          "Code correction question",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-    //save button
-    final saveButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
-      child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-          postDetailsToFirestore();
-        },
-        child: Text(
-          "save",
+          "Students",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -158,44 +94,22 @@ class _HomeAdminState extends State<HomeAdmin> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  examNameField,
                   SizedBox(height: 25),
-                  openQuestionButton,
+                  examButton,
                   SizedBox(height: 25),
-                  multipleChoiseQuestionButton,
+                  studentButton,
                   SizedBox(height: 25),
-                  codeCorrectionQuestionButton,
-                  SizedBox(height: 40),
-                  saveButton,
                 ],
               )),
             ),
           )),
-        ));
+        )
+        );
   }
 
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => SignInAdmin()));
-  }
-    postDetailsToFirestore() async {
-    //calling fire store
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-
-    //calling user model
-    MyExam myExam = MyExam();
-    myExam.uid = user!.uid;
-    myExam.examName = examNameEditingController.text;
-
-    //sending values
-    await firebaseFirestore
-        .collection("exams")
-        .doc(user.uid)
-        .set(myExam.toMap());
-    Fluttertoast.showToast(msg: "Exam created successfully!");
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
   }
 }
