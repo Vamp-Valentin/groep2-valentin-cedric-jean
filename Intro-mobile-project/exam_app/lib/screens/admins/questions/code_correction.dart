@@ -1,7 +1,10 @@
+import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
 import 'package:exam_app/services/auth.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CodeCorrection extends StatefulWidget {
   CodeCorrection({Key? key}) : super(key: key);
@@ -18,6 +21,7 @@ class _CodeCorrectionState extends State<CodeCorrection> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<MyUser>(context);
     final wrongCodeField = TextFormField(
       autofocus: false,
       controller: wrongCodeEditingController,
@@ -67,11 +71,8 @@ class _CodeCorrectionState extends State<CodeCorrection> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainQuestions()),
-          );
+          DatabaseService(uid: user.uid).updateCodeCorrectionQuestion(wrongCodeEditingController.text, correctCodeEditingController.text);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions()));
         },
         child: Text(
           "save",

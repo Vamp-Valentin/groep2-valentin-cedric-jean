@@ -1,36 +1,19 @@
 import 'dart:ffi';
 
 class MyExam {
-  // String? uid;
-  // String? examName;
-  // String? openQuestion;
-  // String? students;
-
-  // MyExam({this.uid, this.examName, this.openQuestion, this.students});
-
-  // //get data from database
-  // factory MyExam.fromMap(map){
-  //   return MyExam(
-  //     uid: map['uid'],
-  //     examName: map['examName'],
-  //     openQuestion: map['openQuestion'],
-  //     students: map['students'],
-  //   );
-  // }
-
-  // //send data to database
-  // Map<String, dynamic> toMap(){
-  //   return {
-  //     'uid': uid,
-  //     'examName': examName,
-  //     'openQuestion': openQuestion,
-  //     'students': students,
-  //   };
-  // }
   final String? uid;
   final String? examName;
   final String? openQuestion;
+  final String? codeCorrectionQuestionWrong;
+  final String? codeCorrectionQuestionCorrect;
   final String? students;
 
-  MyExam({this.uid, this.examName, this.openQuestion, this.students});
+  MyExam(
+      {this.uid,
+      this.examName,
+      this.openQuestion,
+      this.codeCorrectionQuestionWrong,
+      this.codeCorrectionQuestionCorrect,
+      this.students
+      });
 }

@@ -62,7 +62,7 @@ class AuthService {
 
       //create new doc for user
       await DatabaseService(uid: user.uid)
-          .updateUserData("examName", "openQuestion", "students");
+          .updateUserData("examName", "openQuestion","codeCorrectionQuestionWrong", "codeCorrectionQuestionCorrect","students");
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
