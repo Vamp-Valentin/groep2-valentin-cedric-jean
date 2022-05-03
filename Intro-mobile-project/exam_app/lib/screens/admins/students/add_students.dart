@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/screens/admins/home/default_screen.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class AddStudent extends StatefulWidget {
   AddStudent({Key? key}) : super(key: key);
@@ -18,7 +22,7 @@ class _AddStudentState extends State<AddStudent> {
   final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-
+    final user = Provider.of<MyUser>(context);
     final addStudentsField = TextFormField(
       autofocus: false,
       controller: addStudentsEditingController,
@@ -52,7 +56,8 @@ class _AddStudentState extends State<AddStudent> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          //postDetailsToFirestore();
+          DatabaseService(uid: user.uid).updateStudents(addStudentsEditingController.text);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
         },
         child: Text(
           "save",

@@ -18,6 +18,18 @@ class DatabaseService {
       'students': students,
     });
   }
+  Future updateOpenQuestion(
+      String openQuestion) async {
+    return await examCollection.doc(uid).update({
+      'openQuestion': openQuestion,
+    });
+  }
+  Future updateStudents(
+      String students) async {
+    return await examCollection.doc(uid).update({
+      'students': students,
+    });
+  }
 
   //exam list from snapshot
   List<MyExam> _examListFromSnapshot(QuerySnapshot snapshot){

@@ -1,4 +1,5 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/home/exam_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +15,11 @@ class _ExamListState extends State<ExamList> {
   Widget build(BuildContext context) {
 
     final exams = Provider.of<List<MyExam>>(context);
-    exams.forEach((exam){
-      print(exam.examName);
-    });
-    return Container();
+    return ListView.builder(
+      itemCount: exams.length,
+      itemBuilder: (context, index) {
+        return ExamTile(exam: exams[index]);
+      },
+    );
   }
 }

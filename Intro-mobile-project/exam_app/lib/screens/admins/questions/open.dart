@@ -1,25 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
 import 'package:exam_app/services/auth.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class Open extends StatefulWidget {
-  Open({Key? key}) : super(key: key);
+  //Open({Key? key}) : super(key: key);
 
   @override
   State<Open> createState() => _OpenState();
 }
 
 class _OpenState extends State<Open> {
-  final openQuestionEditingController = new TextEditingController();
   final AuthService _auth = AuthService();
-
+  final openQuestionEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<MyUser>(context);
     final openQuestionField = TextFormField(
       autofocus: false,
       controller: openQuestionEditingController,
@@ -52,8 +55,10 @@ class _OpenState extends State<Open> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
+        onPressed: () async{
           //postDetailsToFirestore();
+          DatabaseService(uid: user.uid).updateOpenQuestion(openQuestionEditingController.text);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions()));
         },
         child: Text(
           "save",

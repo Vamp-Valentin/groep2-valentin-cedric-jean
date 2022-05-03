@@ -7,15 +7,14 @@
 // import 'package:provider/provider.dart';
 // import 'package:exam_app/screens/admins/home/exam_list.dart';
 
-
 // class HomeAdmin extends StatefulWidget {
 //   const HomeAdmin({Key? key}) : super(key: key);
 //   //final toggleView;
-//   //const HomeAdmin({Key? key, this.toggleView}) : super(key: key);  
+//   //const HomeAdmin({Key? key, this.toggleView}) : super(key: key);
 
 //   @override
 //   State<HomeAdmin> createState() => _HomeAdminState();
-  
+
 // }
 
 // class _HomeAdminState extends State<HomeAdmin> {
@@ -111,6 +110,8 @@
 //   }
 // }
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/home/default_screen.dart';
+import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -133,14 +134,13 @@ class HomeAdmin extends StatelessWidget {
             actions: <Widget>[
               ActionChip(
                   label: Text("Logout"),
-                  onPressed: () async{
+                  onPressed: () async {
                     await _auth.signOut();
                   })
             ],
           ),
           backgroundColor: Colors.white,
-          body: const ExamList()
-          ),
+          body: const ExamList()),
     );
   }
 }
