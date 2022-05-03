@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_exam.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Open extends StatefulWidget {
   Open({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class Open extends StatefulWidget {
 
 class _OpenState extends State<Open> {
   final openQuestionEditingController = new TextEditingController();
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +52,7 @@ class _OpenState extends State<Open> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainQuestions()),
-          );
+          postDetailsToFirestore();
         },
         child: Text(
           "save",
@@ -69,9 +69,7 @@ class _OpenState extends State<Open> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              ;
-            },
+            onPressed: () {},
           ),
         ),
         backgroundColor: Colors.white,
@@ -96,5 +94,25 @@ class _OpenState extends State<Open> {
             ),
           )),
         ));
+  }
+
+  postDetailsToFirestore() async {
+    //calling fire store
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    //calling user model
+    MyExam myExam = MyExam();
+    myExam.uid = user!.uid;
+    myExam.openQuestion = openQuestionEditingController.text;
+
+    //sending values
+    await firebaseFirestore
+        .collection("exams")
+        .doc(user.uid)
+        .update(myExam.toMap());
+    Fluttertoast.showToast(msg: "Question added successfully!");
+    Navigator.pushAndRemoveUntil((context),
+        MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
   }
 }

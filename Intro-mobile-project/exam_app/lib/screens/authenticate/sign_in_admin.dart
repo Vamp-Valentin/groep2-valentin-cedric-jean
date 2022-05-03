@@ -16,7 +16,7 @@ class SignInAdmin extends StatefulWidget {
 
 class _SignInAdminState extends State<SignInAdmin> {
   //auth class
-  //final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
 
   //from key
   final _formkey = GlobalKey<FormState>();
@@ -26,7 +26,7 @@ class _SignInAdminState extends State<SignInAdmin> {
   final TextEditingController passwordController = new TextEditingController();
 
   //firebase
-  final _auth = FirebaseAuth.instance;
+  //final _auth = FirebaseAuth.instance;
 
   //text field state
   String email = '';
@@ -93,9 +93,11 @@ class _SignInAdminState extends State<SignInAdmin> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
+        onPressed: () async {
+          if (_formkey.currentState!.validate()) {
+            dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text, context);
+          }
           //signIn(emailController.text, passwordController.text);
-          signIn("test@ap.be", "Test123");
         },
         child: Text(
           "Login",
@@ -105,7 +107,6 @@ class _SignInAdminState extends State<SignInAdmin> {
         ),
       ),
     );
-
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -140,12 +141,15 @@ class _SignInAdminState extends State<SignInAdmin> {
                           Text("Dont have an account? "),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Register()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Register()));
                             },
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                color: Colors.redAccent,
+                                  color: Colors.redAccent,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
@@ -160,18 +164,18 @@ class _SignInAdminState extends State<SignInAdmin> {
   }
 
   //login function ->> auth class
-  void signIn(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful!"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomeAdmin())),
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-  }
+  // void signIn(String email, String password) async {
+  // if (_formkey.currentState!.validate()) {
+  //   await _auth
+  //       .signInWithEmailAndPassword(email: email, password: password)
+  //       .then((uid) => {
+  //             Fluttertoast.showToast(msg: "Login Successful!"),
+  //             Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(builder: (context) => HomeAdmin())),
+  //           })
+  //       .catchError((e) {
+  //     Fluttertoast.showToast(msg: e!.message);
+  //   });
+  // }
+  // }
 }

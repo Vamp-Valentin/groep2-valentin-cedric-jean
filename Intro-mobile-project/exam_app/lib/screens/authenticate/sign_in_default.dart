@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
 
 class defaultLoginPage extends StatefulWidget {
+
   defaultLoginPage({Key? key}) : super(key: key);
 
   @override

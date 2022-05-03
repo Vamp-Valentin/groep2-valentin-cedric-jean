@@ -9,6 +9,7 @@ import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/sign_in_admin.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/screens/wrapper.dart';
+import 'package:exam_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -22,7 +23,8 @@ class HomeAdmin extends StatefulWidget {
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
-  final _auth = FirebaseAuth.instance;
+  //final _auth = FirebaseAuth.instance;
+  final AuthService _auth = AuthService();
   final examNameEditingController = new TextEditingController();
 
   @override
@@ -78,8 +80,9 @@ class _HomeAdminState extends State<HomeAdmin> {
           actions: <Widget>[
             ActionChip(
                 label: Text("Logout"),
-                onPressed: () {
-                  logout(context);
+                onPressed: () async{
+                  //logout(context);
+                  await _auth.signOut();
                 })
           ],
         ),
