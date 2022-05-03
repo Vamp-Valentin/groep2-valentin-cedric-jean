@@ -19,7 +19,6 @@ class _StudentDropdownState extends State<StudentDropdown> {
   User? user = FirebaseAuth.instance.currentUser;
   MyUser loggedInUser = MyUser();
   MyExam exam = MyExam();
-  
 
   @override
   void initState() {
@@ -47,38 +46,42 @@ class _StudentDropdownState extends State<StudentDropdown> {
             flex: 1,
             child: Center(
               child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('exams')
-                      .orderBy('examName')
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    // Safety check to ensure that snapshot contains data
-                    // without this safety check, StreamBuilder dirty state warnings will be thrown
-                    if (!snapshot.hasData) return Container();
+                stream: FirebaseFirestore.instance
+                    .collection('exams')
+                    .orderBy('examName')
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  // Safety check to ensure that snapshot contains data
+                  // without this safety check, StreamBuilder dirty state warnings will be thrown
+                  if (!snapshot.hasData) return Container();
 
-                    // Set this value for default,
-                    // setDefault will change if an item was selected
-                    // First item from the List will be displayed
-                    if (setDefaultMake) {
-                      students = snapshot.data!.docs[0].get('students');
-                      debugPrint('setDefault make: $students');
-                      final splitstudents = students?.split(';');
-                      if(splitstudents != null){
+                  // Set this value for default,
+                  // setDefault will change if an item was selected
+                  // First item from the List will be displayed
+                  if (setDefaultMake) {
+                    students = snapshot.data!.docs[0].get('students');
+                    debugPrint('setDefault make: $students');
+                    final splitstudents = students?.split(';');
+                    if (splitstudents != null) {
                       for (int i = 0; i < splitstudents.length; i++) {
                         splitList.add(splitstudents?[i]);
                         debugPrint(splitList[i]);
                       }
-                      student = splitList[0];}
+                      student = splitList[0];
                     }
+                  }
+                  if (dropdownItems.isEmpty) {
                     for (var item in splitList) {
-                      String currency = item;
+                      String stu = item;
                       var newItem = DropdownMenuItem(
-                        child: Text(currency),
-                        value: currency,
+                        child: Text(stu),
+                        value: stu,
                       );
                       dropdownItems.add(newItem);
                     }
+                  }
+                  
                   return DropdownButton(
                     isExpanded: false,
                     value: student,
@@ -98,8 +101,8 @@ class _StudentDropdownState extends State<StudentDropdown> {
                       );
                     },
                   );
-                  },
-                  ),
+                },
+              ),
             ),
           ),
           Text(student),
