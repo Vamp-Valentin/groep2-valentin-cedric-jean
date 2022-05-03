@@ -1,5 +1,6 @@
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
+import 'package:exam_app/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class CodeCorrection extends StatefulWidget {
@@ -10,7 +11,8 @@ class CodeCorrection extends StatefulWidget {
 }
 
 class _CodeCorrectionState extends State<CodeCorrection> {
-
+  
+  final AuthService _auth = AuthService();
   final wrongCodeEditingController = new TextEditingController();
   final correctCodeEditingController = new TextEditingController();
 

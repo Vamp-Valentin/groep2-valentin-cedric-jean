@@ -73,7 +73,14 @@ class AuthService {
   // sign out
   Future signOut() async {
     try {
-      return await _auth.signOut();
+      return await _auth
+          .signOut()
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Logout Successful!"),
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
     } catch (e) {
       print(e.toString());
       return null;

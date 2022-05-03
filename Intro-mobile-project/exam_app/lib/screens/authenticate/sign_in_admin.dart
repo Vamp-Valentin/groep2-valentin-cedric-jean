@@ -25,9 +25,6 @@ class _SignInAdminState extends State<SignInAdmin> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
-  //firebase
-  //final _auth = FirebaseAuth.instance;
-
   //text field state
   String email = '';
   String password = '';
@@ -97,7 +94,6 @@ class _SignInAdminState extends State<SignInAdmin> {
           if (_formkey.currentState!.validate()) {
             dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
           }
-          //signIn(emailController.text, passwordController.text);
         },
         child: Text(
           "Login",
@@ -162,20 +158,4 @@ class _SignInAdminState extends State<SignInAdmin> {
           )),
         ));
   }
-
-  //login function ->> auth class
-  // void signIn(String email, String password) async {
-  // if (_formkey.currentState!.validate()) {
-  //   await _auth
-  //       .signInWithEmailAndPassword(email: email, password: password)
-  //       .then((uid) => {
-  //             Fluttertoast.showToast(msg: "Login Successful!"),
-  //             Navigator.of(context).pushReplacement(
-  //                 MaterialPageRoute(builder: (context) => HomeAdmin())),
-  //           })
-  //       .catchError((e) {
-  //     Fluttertoast.showToast(msg: e!.message);
-  //   });
-  // }
-  // }
 }

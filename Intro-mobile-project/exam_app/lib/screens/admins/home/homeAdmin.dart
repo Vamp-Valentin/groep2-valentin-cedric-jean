@@ -25,7 +25,6 @@ class HomeAdmin extends StatefulWidget {
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
-  //final _auth = FirebaseAuth.instance;
   final AuthService _auth = AuthService();
   final examNameEditingController = new TextEditingController();
 
@@ -112,11 +111,5 @@ class _HomeAdminState extends State<HomeAdmin> {
           )),
         )
         );
-  }
-
-  Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => defaultLoginPage()));
   }
 }
