@@ -11,13 +11,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  //const Home({Key? key}) : super(key: key);
+  final toggleView;
+  const Home({Key? key, this.toggleView}) : super(key: key);  
+  
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  final AuthService _auth = AuthService();
   User? user = FirebaseAuth.instance.currentUser;
   MyUser loggedInUser = MyUser();
 
@@ -42,8 +46,9 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           ActionChip(
               label: Text("Logout"),
-              onPressed: () {
-                logout(context);
+              onPressed: () async{
+                //logout(context);
+                _auth.signOut();
               })
         ],
       ),

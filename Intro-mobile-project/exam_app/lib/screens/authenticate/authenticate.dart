@@ -54,9 +54,9 @@ class _AuthenticateState extends State<Authenticate> {
     //  return Home();
     // }
     if(showSignIn){
-      return defaultLoginPage();
+      return defaultLoginPage(toggleView: toggleView);
     }else{
-      return HomeAdmin();
+      return HomeAdmin(toggleView: toggleView);
     }
     }
   }

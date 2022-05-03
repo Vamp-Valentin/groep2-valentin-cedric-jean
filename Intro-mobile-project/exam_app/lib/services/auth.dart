@@ -33,8 +33,7 @@ class AuthService {
   }
 
   //sign in with email & password
-  Future signInWithEmailAndPassword(
-      String email, String password, BuildContext context) async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -43,8 +42,6 @@ class AuthService {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful!"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomeAdmin())),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);

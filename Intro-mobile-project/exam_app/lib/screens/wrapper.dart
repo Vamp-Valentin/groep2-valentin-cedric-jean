@@ -1,4 +1,5 @@
 import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/sign_in_student.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
@@ -19,7 +20,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return HomeAdmin();
     }
   }
 }

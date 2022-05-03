@@ -15,7 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeAdmin extends StatefulWidget {
-  HomeAdmin({Key? key}) : super(key: key);
+  //HomeAdmin({Key? key}) : super(key: key);
+  final toggleView;
+  const HomeAdmin({Key? key, this.toggleView}) : super(key: key);  
 
   @override
   State<HomeAdmin> createState() => _HomeAdminState();

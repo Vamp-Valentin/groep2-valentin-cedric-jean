@@ -95,7 +95,7 @@ class _SignInAdminState extends State<SignInAdmin> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
-            dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text, context);
+            dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
           }
           //signIn(emailController.text, passwordController.text);
         },

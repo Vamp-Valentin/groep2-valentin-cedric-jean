@@ -8,7 +8,9 @@ final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
 
 class defaultLoginPage extends StatefulWidget {
 
-  defaultLoginPage({Key? key}) : super(key: key);
+  final toggleView;
+  const defaultLoginPage({Key? key, this.toggleView}) : super(key: key);  
+  //defaultLoginPage({Key? key}) : super(key: key);
 
   @override
   State<defaultLoginPage> createState() => _defaultLoginPageState();
