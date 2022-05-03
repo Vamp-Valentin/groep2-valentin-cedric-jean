@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exam_app/models/my_exam.dart';
 
 class DatabaseService {
   final String? uid;
@@ -18,8 +19,21 @@ class DatabaseService {
     });
   }
 
+  //exam list from snapshot
+  List<MyExam> _examListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc) {
+      return MyExam(
+        uid: doc.get('uid'),
+        examName: doc.get('examName'),
+        openQuestion: doc.get('openQuestion'),
+        students: doc.get('students'),
+      );
+    }).toList();
+  }
+
   //get exam stream
-  Stream<QuerySnapshot> get exams {
-    return examCollection.snapshots();
+  Stream<List<MyExam>> get exams {
+    return examCollection.snapshots()
+    .map(_examListFromSnapshot);
   }
 }
