@@ -6,6 +6,9 @@ class MyExam {
   final String? openQuestion;
   final String? codeCorrectionQuestionWrong;
   final String? codeCorrectionQuestionCorrect;
+  final String? multipleChoiseQuestion;
+  final String? multipleChoisePossibilities;
+  final String? multipleChoiseAnswer;
   final String? students;
 
   MyExam(
@@ -14,6 +17,9 @@ class MyExam {
       this.openQuestion,
       this.codeCorrectionQuestionWrong,
       this.codeCorrectionQuestionCorrect,
+      this.multipleChoiseQuestion,
+      this.multipleChoisePossibilities,
+      this.multipleChoiseAnswer,
       this.students
       });
 }

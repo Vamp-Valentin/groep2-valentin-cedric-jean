@@ -61,8 +61,15 @@ class AuthService {
       User user = userCredential.user!;
 
       //create new doc for user
-      await DatabaseService(uid: user.uid)
-          .updateUserData("examName", "openQuestion","codeCorrectionQuestionWrong", "codeCorrectionQuestionCorrect","students");
+      await DatabaseService(uid: user.uid).updateUserData(
+          "examName",
+          "openQuestion",
+          "codeCorrectionQuestionWrong",
+          "codeCorrectionQuestionCorrect",
+          "multipleChoiseQuestion",
+          "multipleChoisePossibilities",
+          "multipleChoiseAnswer",
+          "students");
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

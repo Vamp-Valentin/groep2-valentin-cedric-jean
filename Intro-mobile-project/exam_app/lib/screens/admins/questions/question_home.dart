@@ -146,7 +146,14 @@ class _MainQuestionsState extends State<MainQuestions> {
         onPressed: () async {
           //postDetailsToFirestore();
           DatabaseService(uid: user.uid).updateUserData(
-              examNameEditingController.text, "openQuestion","codeCorrectionQuestionWrong", "codeCorrectionQuestionCorrect", "students");
+              examNameEditingController.text,
+              "openQuestion",
+              "codeCorrectionQuestionWrong",
+              "codeCorrectionQuestionCorrect",
+              "multipleChoiseQuestion",
+              "multipleChoisePossibilities",
+              "multipleChoiseAnswer",
+              "students");
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
         },

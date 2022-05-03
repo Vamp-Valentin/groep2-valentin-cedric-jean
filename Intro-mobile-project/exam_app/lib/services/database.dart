@@ -15,6 +15,9 @@ class DatabaseService {
       String openQuestion,
       String codeCorrectionQuestionWrong,
       String codeCorrectionQuestionCorrect,
+      String multipleChoiseQuestion,
+      String multipleChoisePossibilities,
+      String multipleChoiseAnswer,
       String students) async {
     return await examCollection.doc(uid).set({
       'uid': uid,
@@ -22,6 +25,9 @@ class DatabaseService {
       'openQuestion': openQuestion,
       'codeCorrectionQuestionWrong': codeCorrectionQuestionWrong,
       'codeCorrectionQuestionCorrect': codeCorrectionQuestionCorrect,
+      'multipleChoiseQuestion': multipleChoiseQuestion,
+      'multipleChoisePossibilities': multipleChoisePossibilities,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
       'students': students,
     });
   }
@@ -41,6 +47,19 @@ class DatabaseService {
     return await examCollection.doc(uid).update({
       'codeCorrectionQuestionWrong': codeCorrectionQuestionWrong,
       'codeCorrectionQuestionCorrect': codeCorrectionQuestionCorrect,
+    });
+  }
+
+  //update code correction question
+  Future updateMultipleChoiseQuestion(
+    String multipleChoiseQuestion,
+    String multipleChoisePossibilities,
+    String multipleChoiseAnswer,
+  ) async {
+    return await examCollection.doc(uid).update({
+      'multipleChoiseQuestion': multipleChoiseQuestion,
+      'multipleChoisePossibilities': multipleChoisePossibilities,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
     });
   }
 
