@@ -115,14 +115,14 @@ class _MainQuestionsState extends State<MainQuestions> {
       ),
     );
 
-    //multiple choise question
+    //add students
     final addStudentsButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.green,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => AddStudent()));
@@ -142,7 +142,7 @@ class _MainQuestionsState extends State<MainQuestions> {
       color: Colors.redAccent,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
           //postDetailsToFirestore();
           DatabaseService(uid: user.uid).updateUserData(
@@ -169,10 +169,10 @@ class _MainQuestionsState extends State<MainQuestions> {
     final cancelButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
+      color: Colors.grey,
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
@@ -185,6 +185,7 @@ class _MainQuestionsState extends State<MainQuestions> {
         ),
       ),
     );
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
@@ -192,7 +193,7 @@ class _MainQuestionsState extends State<MainQuestions> {
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
-        body: Center(
+        body: Container(
           child: SingleChildScrollView(
               child: Container(
             color: Colors.white,
@@ -211,9 +212,9 @@ class _MainQuestionsState extends State<MainQuestions> {
                   multipleChoiseQuestionButton,
                   SizedBox(height: 25),
                   codeCorrectionQuestionButton,
-                  SizedBox(height: 50),
+                  SizedBox(height: 100),
                   addStudentsButton,
-                  SizedBox(height: 70),
+                  SizedBox(height: 25),
                   saveButton,
                   SizedBox(height: 25),
                   cancelButton,

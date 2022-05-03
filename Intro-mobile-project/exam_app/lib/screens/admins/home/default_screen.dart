@@ -11,9 +11,9 @@ import 'package:exam_app/screens/admins/home/exam_list.dart';
 
 
 class HomeAdmin1 extends StatefulWidget {
-  const HomeAdmin1({Key? key}) : super(key: key);
-  //final toggleView;
-  //const HomeAdmin({Key? key, this.toggleView}) : super(key: key);  
+  //const HomeAdmin1({Key? key}) : super(key: key);
+  final toggleView;
+  const HomeAdmin1({Key? key, this.toggleView}) : super(key: key);  
 
   @override
   State<HomeAdmin1> createState() => _HomeAdmin1State();

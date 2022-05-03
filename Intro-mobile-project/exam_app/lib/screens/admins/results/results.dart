@@ -1,4 +1,5 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/results/student_list.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class Results extends StatelessWidget {
             ],
           ),
           backgroundColor: Colors.white,
-          body: const ExamList()
+          body: const StudentList()
           ),
     );
   }
