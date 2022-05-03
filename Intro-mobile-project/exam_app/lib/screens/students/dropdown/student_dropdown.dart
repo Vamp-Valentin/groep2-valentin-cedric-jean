@@ -20,15 +20,15 @@ class _StudentDropdownState extends State<StudentDropdown> {
   MyUser loggedInUser = MyUser();
   MyExam exam = MyExam();
 
-  @override
-  void initState() {
-    super.initState();
-    if (user?.uid != null) {
-      FirebaseFirestore.instance.collection("exams").doc(user!.uid).get().then(
-          (value) =>
-              {this.exam = MyExam.fromMap(value.data()), setState(() {})});
-    }
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   if (user?.uid != null) {
+  //     FirebaseFirestore.instance.collection("exams").doc(user!.uid).get().then(
+  //         (value) =>
+  //             {this.exam = MyExam.fromMap(value.data()), setState(() {})});
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                       dropdownItems.add(newItem);
                     }
                   }
-                  
+
                   return DropdownButton(
                     isExpanded: false,
                     value: student,

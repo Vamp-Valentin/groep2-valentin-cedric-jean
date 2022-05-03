@@ -118,7 +118,7 @@ class _MainQuestionsState extends State<MainQuestions> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          postDetailsToFirestore();
+          //postDetailsToFirestore();
         },
         child: Text(
           "save",
@@ -163,23 +163,23 @@ class _MainQuestionsState extends State<MainQuestions> {
         ));
   }
 
-  postDetailsToFirestore() async {
-    //calling fire store
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
+  // postDetailsToFirestore() async {
+  //   //calling fire store
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   User? user = _auth.currentUser;
 
-    //calling user model
-    MyExam myExam = MyExam();
-    myExam.uid = user!.uid;
-    myExam.examName = examNameEditingController.text;
+  //   //calling user model
+  //   MyExam myExam = MyExam();
+  //   myExam.uid = user!.uid;
+  //   myExam.examName = examNameEditingController.text;
 
-    //sending values
-    await firebaseFirestore
-        .collection("exams")
-        .doc(user.uid)
-        .set(myExam.toMap());
-    Fluttertoast.showToast(msg: "Exam created successfully!");
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
-  }
+  //   //sending values
+  //   await firebaseFirestore
+  //       .collection("exams")
+  //       .doc(user.uid)
+  //       .set(myExam.toMap());
+  //   Fluttertoast.showToast(msg: "Exam created successfully!");
+  //   Navigator.pushAndRemoveUntil((context),
+  //       MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
+  // }
 }

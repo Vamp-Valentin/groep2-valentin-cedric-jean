@@ -23,13 +23,14 @@ class DatabaseService {
   List<MyExam> _examListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.docs.map((doc) {
       return MyExam(
-        uid: doc.get('uid'),
-        examName: doc.get('examName'),
-        openQuestion: doc.get('openQuestion'),
-        students: doc.get('students'),
+        uid: doc.data().toString().contains('uid') ? doc.get('uid') : '',
+        examName: doc.data().toString().contains('examName') ? doc.get('examName') : '',
+        openQuestion: doc.data().toString().contains('openQuestion') ? doc.get('openQuestion') : '',
+        students: doc.data().toString().contains('students') ? doc.get('students') : '',
       );
     }).toList();
   }
+
 
   //get exam stream
   Stream<List<MyExam>> get exams {

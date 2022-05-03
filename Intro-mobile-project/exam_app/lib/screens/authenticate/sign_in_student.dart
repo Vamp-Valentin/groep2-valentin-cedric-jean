@@ -40,16 +40,16 @@ class _SignInStudentState extends State<SignInStudent> {
   MyUser loggedInUser = MyUser();
   MyExam exam = MyExam();
 
-  @override
-  void initState() {
-    super.initState();
-    if(user?.uid != null){
-    FirebaseFirestore.instance.collection("exams").doc(user!.uid).get().then(
-        (value) => {
-              this.exam = MyExam.fromMap(value.data()),
-              setState(() {})
-            });
-  }}
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   if(user?.uid != null){
+  //   FirebaseFirestore.instance.collection("exams").doc(user!.uid).get().then(
+  //       (value) => {
+  //             this.exam = MyExam.fromMap(value.data()),
+  //             setState(() {})
+  //           });
+  // }}
 
   @override
   Widget build(BuildContext context) {
