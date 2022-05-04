@@ -109,6 +109,10 @@ class _MultipleChoiceState extends State<MultipleChoice> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions())),
+          ),
           backgroundColor: Colors.red,
           title: Text("Exams"),
           centerTitle: true,

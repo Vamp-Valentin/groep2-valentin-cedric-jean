@@ -70,13 +70,13 @@ class _OpenState extends State<Open> {
     );
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions())),
+          ),
           backgroundColor: Colors.red,
           title: Text("Open question"),
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {},
-          ),
         ),
         backgroundColor: Colors.white,
         body: Center(

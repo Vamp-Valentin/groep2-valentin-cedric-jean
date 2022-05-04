@@ -89,17 +89,6 @@ class DatabaseService {
     }).toList();
   }
 
-  List<MyExam> _studentListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      return MyExam(
-        uid: doc.data().toString().contains('uid') ? doc.get('uid') : '',
-        students: doc.data().toString().contains('students')
-            ? doc.get('students')
-            : '',
-      );
-    }).toList();
-  }
-
   //get exam stream
   Stream<List<MyExam>> get exams {
     return examCollection.snapshots().map(_examListFromSnapshot);

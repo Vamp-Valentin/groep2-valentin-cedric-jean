@@ -57,7 +57,7 @@ class _AddStudentState extends State<AddStudent> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           DatabaseService(uid: user.uid).updateStudents(addStudentsEditingController.text);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },
         child: Text(
           "save",
@@ -69,8 +69,12 @@ class _AddStudentState extends State<AddStudent> {
     );
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin())),
+          ),
           backgroundColor: Colors.red,
-          title: Text("Exams"),
+          title: Text("Grade"),
           centerTitle: true,
         ),
         backgroundColor: Colors.white,

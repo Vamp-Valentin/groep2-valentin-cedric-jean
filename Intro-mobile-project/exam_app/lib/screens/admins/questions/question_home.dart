@@ -155,7 +155,7 @@ class _MainQuestionsState extends State<MainQuestions> {
               "multipleChoiseAnswer",
               "students");
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
+              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },
         child: Text(
           "save",
@@ -175,7 +175,7 @@ class _MainQuestionsState extends State<MainQuestions> {
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeAdmin1()));
+              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },
         child: Text(
           "cancel",
@@ -188,6 +188,10 @@ class _MainQuestionsState extends State<MainQuestions> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin())),
+          ),
           backgroundColor: Colors.red,
           title: Text("Exams"),
           centerTitle: true,
@@ -224,24 +228,4 @@ class _MainQuestionsState extends State<MainQuestions> {
           )),
         ));
   }
-
-  // postDetailsToFirestore() async {
-  //   //calling fire store
-  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  //   User? user = _auth.currentUser;
-
-  //   //calling user model
-  //   MyExam myExam = MyExam();
-  //   myExam.uid = user!.uid;
-  //   myExam.examName = examNameEditingController.text;
-
-  //   //sending values
-  //   await firebaseFirestore
-  //       .collection("exams")
-  //       .doc(user.uid)
-  //       .set(myExam.toMap());
-  //   Fluttertoast.showToast(msg: "Exam created successfully!");
-  //   Navigator.pushAndRemoveUntil((context),
-  //       MaterialPageRoute(builder: (context) => HomeAdmin()), (route) => false);
-  // }
 }

@@ -85,6 +85,10 @@ class _CodeCorrectionState extends State<CodeCorrection> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions())),
+          ),
           backgroundColor: Colors.red,
           title: Text("Code correction question"),
           centerTitle: true,

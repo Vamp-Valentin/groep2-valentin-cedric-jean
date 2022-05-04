@@ -3,6 +3,7 @@ import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
 import 'package:exam_app/screens/admins/results/results.dart';
 import 'package:exam_app/screens/admins/students/add_students.dart';
+import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,17 @@ import 'package:provider/provider.dart';
 import 'package:exam_app/screens/admins/home/exam_list.dart';
 
 
-class HomeAdmin1 extends StatefulWidget {
+class HomeAdmin extends StatefulWidget {
   //const HomeAdmin1({Key? key}) : super(key: key);
   final toggleView;
-  const HomeAdmin1({Key? key, this.toggleView}) : super(key: key);  
+  const HomeAdmin({Key? key, this.toggleView}) : super(key: key);  
 
   @override
-  State<HomeAdmin1> createState() => _HomeAdmin1State();
+  State<HomeAdmin> createState() => _HomeAdminState();
   
 }
 
-class _HomeAdmin1State extends State<HomeAdmin1> {
+class _HomeAdminState extends State<HomeAdmin> {
   final AuthService _auth = AuthService();
   final examNameEditingController = new TextEditingController();
 
@@ -40,7 +41,7 @@ class _HomeAdmin1State extends State<HomeAdmin1> {
               MaterialPageRoute(builder: (context) => MainQuestions()));
         },
         child: Text(
-          "Exams",
+          "Create exam",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -61,7 +62,7 @@ class _HomeAdmin1State extends State<HomeAdmin1> {
               MaterialPageRoute(builder: (context) => AddStudent()));
         },
         child: Text(
-          "Students",
+          "Grade",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -69,7 +70,7 @@ class _HomeAdmin1State extends State<HomeAdmin1> {
       ),
     );
 
-    //exam button
+    //results button
     final resultButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
@@ -96,7 +97,7 @@ class _HomeAdmin1State extends State<HomeAdmin1> {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.red,
-            title: Text("Exams"),
+            title: Text("Menu"),
             centerTitle: true,
             actions: <Widget>[
               ActionChip(
