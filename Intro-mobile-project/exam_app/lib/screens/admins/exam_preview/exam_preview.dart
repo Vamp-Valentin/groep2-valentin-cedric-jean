@@ -18,20 +18,13 @@ class _ExamPreview extends State<ExamPreview> {
   @override
   Widget build(BuildContext context) {
     final exams = Provider.of<List<MyExam>>(context);
+    //bool show = false;
     final questionlist = [];
-    for (var ex in exams) {
-      if (ex.examName == "Frans") {
-        questionlist.add(ex.codeCorrectionQuestionCorrect);
-        questionlist.add(ex.multipleChoiseQuestion);
-        questionlist.add(ex.openQuestion);
-      }
-    }
     debugPrint(questionlist.length.toString());
     return ListView.builder(
           itemCount: exams.length,
           itemBuilder: (context, index) {
             return Column(children: [
-              
               OpenTile(exam: exams[index]),
               MultipleChoiceTile(exam: exams[index]),
               CodeCorrectionTile(exam: exams[index]),

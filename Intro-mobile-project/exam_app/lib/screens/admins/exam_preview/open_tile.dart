@@ -7,12 +7,16 @@ import 'package:provider/provider.dart';
 class OpenTile extends StatelessWidget {
   //const ExamTile({Key? key}) : super(key: key);
   final MyExam? exam;
+  final bool? show = true;
   OpenTile({this.exam});
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser>(context);
-    if(exam!.openQuestion.toString() != null){
+    if(exam!.openQuestion != null){
+      show==true;
+    }
+    if(show == true){
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -40,6 +44,7 @@ class OpenTile extends StatelessWidget {
                     child: const Icon(Icons.delete),
                     onPressed: () {
                       DatabaseService(uid: user.uid).deleteOpenQuestion();
+                      show==false;
                     },
                   ),
                 ],
