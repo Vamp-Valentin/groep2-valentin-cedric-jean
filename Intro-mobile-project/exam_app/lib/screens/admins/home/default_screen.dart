@@ -1,4 +1,6 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/exam_preview/exam.dart';
+import 'package:exam_app/screens/admins/exam_preview/exam_preview.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/admins/questions/question_home.dart';
 import 'package:exam_app/screens/admins/results/results.dart';
@@ -91,6 +93,27 @@ class _HomeAdminState extends State<HomeAdmin> {
       ),
     );
 
+    //preview button
+    final previewButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Exam()));
+        },
+        child: Text(
+          "Exam preview",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return StreamProvider<List<MyExam>?>.value(
       initialData: [],
       value: DatabaseService().exams,
@@ -126,6 +149,8 @@ class _HomeAdminState extends State<HomeAdmin> {
                     studentButton,
                     SizedBox(height: 25),
                     resultButton,
+                    SizedBox(height: 25),
+                    previewButton,
                     SizedBox(height: 25),
                   ],
                 )),

@@ -39,6 +39,12 @@ class DatabaseService {
       'openQuestion': openQuestion,
     });
   }
+  //update open question
+  Future deleteOpenQuestion() async {
+    return await examCollection.doc(uid).update({
+      'openQuestion': "",
+    });
+  }
 
   //update code correction question
   Future updateCodeCorrectionQuestion(
@@ -81,6 +87,21 @@ class DatabaseService {
             : '',
         openQuestion: doc.data().toString().contains('openQuestion')
             ? doc.get('openQuestion')
+            : '',
+        codeCorrectionQuestionWrong: doc.data().toString().contains('codeCorrectionQuestionWrong')
+            ? doc.get('codeCorrectionQuestionWrong')
+            : '',
+        codeCorrectionQuestionCorrect: doc.data().toString().contains('codeCorrectionQuestionCorrect')
+            ? doc.get('codeCorrectionQuestionCorrect')
+            : '',
+        multipleChoiseQuestion: doc.data().toString().contains('multipleChoiseQuestion')
+            ? doc.get('multipleChoiseQuestion')
+            : '',
+        multipleChoisePossibilities: doc.data().toString().contains('multipleChoisePossibilities')
+            ? doc.get('multipleChoisePossibilities')
+            : '',
+        multipleChoiseAnswer: doc.data().toString().contains('multipleChoiseAnswer')
+            ? doc.get('multipleChoiseAnswer')
             : '',
         students: doc.data().toString().contains('students')
             ? doc.get('students')
