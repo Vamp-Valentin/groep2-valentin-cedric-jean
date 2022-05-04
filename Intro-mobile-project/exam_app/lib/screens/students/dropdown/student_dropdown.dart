@@ -96,7 +96,6 @@ class _StudentDropdownState extends State<StudentDropdown> {
               ),
             ),
           ),
-          Text(student),
         ],
       ),
     );
