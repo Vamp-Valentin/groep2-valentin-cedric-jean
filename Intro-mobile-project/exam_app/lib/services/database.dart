@@ -19,7 +19,8 @@ class DatabaseService {
       String multipleChoiseQuestion,
       String multipleChoisePossibilities,
       String multipleChoiseAnswer,
-      String students) async {
+      String students,
+      int timer) async {
     return await examCollection.doc(uid).set({
       'uid': uid,
       'examName': examName,
@@ -30,6 +31,7 @@ class DatabaseService {
       'multipleChoisePossibilities': multipleChoisePossibilities,
       'multipleChoiseAnswer': multipleChoiseAnswer,
       'students': students,
+      'timer': timer
     });
   }
 
@@ -39,6 +41,13 @@ class DatabaseService {
       'openQuestion': openQuestion,
     });
   }
+
+  Future update(int timer) async {
+    return await examCollection.doc(uid).update({
+      'timer': timer,
+    });
+  }
+
   //update open question
   Future deleteOpenQuestion() async {
     return await examCollection.doc(uid).update({

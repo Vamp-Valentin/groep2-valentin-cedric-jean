@@ -22,6 +22,7 @@ class MainQuestions extends StatefulWidget {
 class _MainQuestionsState extends State<MainQuestions> {
   final _auth = FirebaseAuth.instance;
   final examNameEditingController = new TextEditingController();
+  final timerEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final MyExam exam;
@@ -49,6 +50,28 @@ class _MainQuestionsState extends State<MainQuestions> {
           prefixIcon: Icon(Icons.account_circle),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Exam name",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
+
+    //timer
+    final timerField = TextFormField(
+      autofocus: false,
+      controller: timerEditingController,
+      keyboardType: TextInputType.number,
+      validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Please enter amount of minutes';
+              }
+              return null;
+            },
+      onSaved: (value) {
+        timerEditingController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+          prefixIcon: Icon(Icons.timer),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Minutes",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 
@@ -153,7 +176,8 @@ class _MainQuestionsState extends State<MainQuestions> {
               "multipleChoiseQuestion",
               "multipleChoisePossibilities",
               "multipleChoiseAnswer",
-              "students");
+              "students",
+              10);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },
@@ -210,6 +234,8 @@ class _MainQuestionsState extends State<MainQuestions> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   examNameField,
+                  SizedBox(height: 25),
+                  timerField,
                   SizedBox(height: 25),
                   openQuestionButton,
                   SizedBox(height: 25),

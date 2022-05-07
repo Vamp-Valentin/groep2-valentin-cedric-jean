@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
+        onPressed: ()async {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => StartExam()));
         },

@@ -10,6 +10,7 @@ class MyExam {
   final String? multipleChoisePossibilities;
   final String? multipleChoiseAnswer;
   final String? students;
+  final num? timer;
 
   MyExam(
       {this.uid,
@@ -20,6 +21,7 @@ class MyExam {
       this.multipleChoiseQuestion,
       this.multipleChoisePossibilities,
       this.multipleChoiseAnswer,
-      this.students
+      this.students,
+      this.timer
       });
 }

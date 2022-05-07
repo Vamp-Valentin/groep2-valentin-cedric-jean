@@ -69,7 +69,8 @@ class AuthService {
           "multipleChoiseQuestion",
           "multipleChoisePossibilities",
           "multipleChoiseAnswer",
-          "students");
+          "students",
+          10);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
