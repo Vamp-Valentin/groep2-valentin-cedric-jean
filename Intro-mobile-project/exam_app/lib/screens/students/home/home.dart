@@ -1,14 +1,18 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/screens/admins/exam_preview/exam.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
 import 'package:exam_app/screens/authenticate/authenticate.dart';
 import 'package:exam_app/screens/authenticate/sign_in_student.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
+import 'package:exam_app/screens/students/exam/startExam.dart';
 import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../admins/questions/question_home.dart';
 
 class Home extends StatefulWidget {
   //const Home({Key? key}) : super(key: key);
@@ -38,6 +42,26 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    //startexam button
+    final examButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => StartExam()));
+        },
+        child: Text(
+          "Start exam",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -66,31 +90,12 @@ class _HomeState extends State<Home> {
                   fit: BoxFit.contain,
                 ),
               ),
-              Text(
-                "Welcome back",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
               SizedBox(
                 height: 10,
               ),
-              Text(
-                "${loggedInUser.firstName} ${loggedInUser.lastName}",
-                style: TextStyle(
-                    color: Colors.black54, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                "${loggedInUser.email}",
-                style: TextStyle(
-                    color: Colors.black54, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                "${loggedInUser.isAdmin}",
-                style: TextStyle(
-                    color: Colors.black54, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 15,
-              ),
+              
+              examButton
+              
             ],
           ),
         ),
