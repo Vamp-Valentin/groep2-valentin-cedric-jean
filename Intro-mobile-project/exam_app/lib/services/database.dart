@@ -6,9 +6,24 @@ class DatabaseService {
   final String? uid;
   DatabaseService({this.uid});
 
-  //collection reference
+  //exam collection reference
   final CollectionReference examCollection =
       FirebaseFirestore.instance.collection('exams');
+
+  //student collection reference
+  final CollectionReference studentCollection =
+      FirebaseFirestore.instance.collection('students');
+
+  //update all
+  Future updateStudentData(String? sNumber, String? question,
+      String? answer, int? timer) async {
+    return await studentCollection.doc(sNumber).set({
+      'sNumber': sNumber,
+      'question': question,
+      'answer': answer,
+      'timer': timer,
+    });
+  }
 
   //update all
   Future updateUserData(
@@ -97,23 +112,31 @@ class DatabaseService {
         openQuestion: doc.data().toString().contains('openQuestion')
             ? doc.get('openQuestion')
             : '',
-        codeCorrectionQuestionWrong: doc.data().toString().contains('codeCorrectionQuestionWrong')
-            ? doc.get('codeCorrectionQuestionWrong')
-            : '',
-        codeCorrectionQuestionCorrect: doc.data().toString().contains('codeCorrectionQuestionCorrect')
-            ? doc.get('codeCorrectionQuestionCorrect')
-            : '',
-        multipleChoiseQuestion: doc.data().toString().contains('multipleChoiseQuestion')
-            ? doc.get('multipleChoiseQuestion')
-            : '',
-        multipleChoisePossibilities: doc.data().toString().contains('multipleChoisePossibilities')
-            ? doc.get('multipleChoisePossibilities')
-            : '',
-        multipleChoiseAnswer: doc.data().toString().contains('multipleChoiseAnswer')
-            ? doc.get('multipleChoiseAnswer')
-            : '',
+        codeCorrectionQuestionWrong:
+            doc.data().toString().contains('codeCorrectionQuestionWrong')
+                ? doc.get('codeCorrectionQuestionWrong')
+                : '',
+        codeCorrectionQuestionCorrect:
+            doc.data().toString().contains('codeCorrectionQuestionCorrect')
+                ? doc.get('codeCorrectionQuestionCorrect')
+                : '',
+        multipleChoiseQuestion:
+            doc.data().toString().contains('multipleChoiseQuestion')
+                ? doc.get('multipleChoiseQuestion')
+                : '',
+        multipleChoisePossibilities:
+            doc.data().toString().contains('multipleChoisePossibilities')
+                ? doc.get('multipleChoisePossibilities')
+                : '',
+        multipleChoiseAnswer:
+            doc.data().toString().contains('multipleChoiseAnswer')
+                ? doc.get('multipleChoiseAnswer')
+                : '',
         students: doc.data().toString().contains('students')
             ? doc.get('students')
+            : '',
+        timer: doc.data().toString().contains('timer')
+            ? doc.get('timer')
             : '',
       );
     }).toList();
@@ -122,5 +145,10 @@ class DatabaseService {
   //get exam stream
   Stream<List<MyExam>> get exams {
     return examCollection.snapshots().map(_examListFromSnapshot);
+  }
+
+  //get exam stream
+  Stream<List<MyExam>> get students {
+    return studentCollection.snapshots().map(_examListFromSnapshot);
   }
 }

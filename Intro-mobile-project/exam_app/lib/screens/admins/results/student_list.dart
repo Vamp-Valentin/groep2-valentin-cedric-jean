@@ -21,12 +21,14 @@ class _StudentListState extends State<StudentList> {
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
         stulist.add(stu);
+        DatabaseService(uid: stu)
+            .updateStudentData(stu, "question", "answer", 10);
       }
     }
     for (int i = 0; i < stulist.length; i++) {
-    return ListView.builder(
-      itemCount: stulist.length,
-      itemBuilder: (context, index) {
+      return ListView.builder(
+        itemCount: stulist.length,
+        itemBuilder: (context, index) {
           debugPrint(stulist.toString());
           return ListTile(
             leading: const CircleAvatar(
@@ -36,9 +38,10 @@ class _StudentListState extends State<StudentList> {
             ),
             title: Text(stulist[index]),
           );
-     },
-   );
-   }return Container();
+        },
+      );
+    }
+    return Container();
   }
 
   List splitStudents(String? students) {

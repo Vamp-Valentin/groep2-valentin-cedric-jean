@@ -55,9 +55,11 @@ class _AddStudentState extends State<AddStudent> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-          DatabaseService(uid: user.uid).updateStudents(addStudentsEditingController.text);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin()));
+        onPressed: () async {
+          DatabaseService(uid: user.uid)
+              .updateStudents(addStudentsEditingController.text);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },
         child: Text(
           "save",
@@ -71,7 +73,8 @@ class _AddStudentState extends State<AddStudent> {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeAdmin())),
+            onPressed: () => Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomeAdmin())),
           ),
           backgroundColor: Colors.red,
           title: Text("Grade"),
