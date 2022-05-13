@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:exam_app/models/my_student.dart';
+
 class MyUser {
   String? uid;
   String? sNumber;

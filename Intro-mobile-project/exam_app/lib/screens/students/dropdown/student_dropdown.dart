@@ -18,9 +18,9 @@ class StudentDropdown extends StatefulWidget {
 class _StudentDropdownState extends State<StudentDropdown> {
   var students, carMakeModel;
   var setDefaultMake = true, setDefaultMakeModel = true;
-  // User? user = FirebaseAuth.instance.currentUser;
-  // MyUser loggedInUser = MyUser();
-  // MyExam exam = MyExam();
+    // User? user = FirebaseAuth.instance.currentUser;
+    // MyUser loggedInUser = MyUser();
+    // MyExam exam = MyExam();
 
 
   @override
@@ -40,25 +40,21 @@ class _StudentDropdownState extends State<StudentDropdown> {
             child: Center(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('exams')
-                    .orderBy('examName')
+                    .collection('students')
+                    .orderBy('sNumber')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
-                  // Safety check to ensure that snapshot contains data
-                  // without this safety check, StreamBuilder dirty state warnings will be thrown
                   if (!snapshot.hasData) return Container();
-
-                  // Set this value for default,
-                  // setDefault will change if an item was selected
-                  // First item from the List will be displayed
                   if (setDefaultMake) {
-                    students = snapshot.data!.docs[0].get('students');
+                    List students = [];
+                    for(int i = 0;i< snapshot.data!.docs.length;i++){
+                      students.add(snapshot.data!.docs[i].get('sNumber'));
+                    }
                     debugPrint('setDefault make: $students');
-                    final splitstudents = students?.split(';');
-                    if (splitstudents != null) {
-                      for (int i = 0; i < splitstudents.length; i++) {
-                        splitList.add(splitstudents?[i]);
+                    if (students != null) {
+                      for (int i = 0; i < students.length; i++) {
+                        splitList.add(students?[i]);
                         debugPrint(splitList[i]);
                       }
                       student = splitList[0];
@@ -74,7 +70,6 @@ class _StudentDropdownState extends State<StudentDropdown> {
                       dropdownItems.add(newItem);
                     }
                   }
-
                   return DropdownButton(
                     isExpanded: false,
                     value: student,
@@ -86,11 +81,8 @@ class _StudentDropdownState extends State<StudentDropdown> {
                       setState(
                         () {
                           debugPrint('make selected: $value');
-                          // Selected value will be stored
                           student = value.toString();
-                          // Default dropdown value won't be displayed anymore
                           setDefaultMake = false;
-                          // Set makeModel to true to display first car from list
                           setDefaultMakeModel = true;
                         },
                       );
