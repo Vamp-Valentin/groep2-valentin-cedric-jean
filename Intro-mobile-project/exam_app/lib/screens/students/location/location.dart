@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_student.dart';
+import 'package:exam_app/screens/students/dropdown/student_dropdown.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationWidget extends StatefulWidget {
-  const LocationWidget({Key? key, this.student}) : super(key: key);
-  final String? student;
+  final getLocation;
+  final String? stu;
+  const LocationWidget({Key? key, this.getLocation, this.stu}) : super(key: key);
+  
 
   @override
   State<LocationWidget> createState() => _LocationWidgetState();
@@ -79,60 +82,13 @@ class _LocationWidgetState extends State<LocationWidget> {
       longlatitude = currentPosition.longitude.toString();
             print(latitude);
       print(longlatitude);
-      DatabaseService(uid: "").updateLatitudeAndLonglatitude(currentPosition.latitude.toString(), currentPosition.longitude.toString());
+      print(StudentDropdown().student.toString());
+      DatabaseService(uid: StudentDropdown().student.toString()).updateLatitudeAndLonglatitude(currentPosition.latitude.toString(), currentPosition.longitude.toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // String student = "";
-    // return Scaffold(
-    //   body: Center(
-    //     child: Column(
-    //       children: [
-    //         SizedBox(
-    //           height: 50,
-    //         ),
-    //         StreamBuilder<QuerySnapshot>(
-    //             stream:
-    //                 FirebaseFirestore.instance.collection('students').snapshots(),
-    //             builder: (BuildContext context,
-    //                 AsyncSnapshot<QuerySnapshot> snapshot) {
-    //               if (!snapshot.hasData) return Container();
-    //               student = snapshot.data!.docs[0].get('sNumber');
-                  
-    //               return Text(
-    //                 '$student',
-    //                 style: TextStyle(
-    //                     fontWeight: FontWeight.bold,
-    //                     color: Colors.black,
-    //                     fontSize: 50),
-    //               );
-    //             }),
-    //         SizedBox(height: 20),
-    //       ],
-    //     ),
-    //   ),
-    // );
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Geolocator Package in Flutter"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(position == null ? "Location" : position.toString()),
-            ElevatedButton(
-              onPressed: () {
-                getLocation();
-              },
-              child: Text("Get Location"),
-            ),
-          ],
-        ),
-      ),
-    );
+    return Container();
   }
 }

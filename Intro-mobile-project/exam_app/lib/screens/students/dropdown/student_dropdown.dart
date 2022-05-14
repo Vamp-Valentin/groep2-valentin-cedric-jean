@@ -8,9 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class StudentDropdown extends StatefulWidget {
-  StudentDropdown({Key? key, this.title}) : super(key: key);
+  StudentDropdown({Key? key, this.student}) : super(key: key);
 
-  final String? title;
+  final String? student;
 
   @override
   _StudentDropdownState createState() => _StudentDropdownState();
@@ -77,8 +77,8 @@ class _StudentDropdownState extends State<StudentDropdown> {
                     items: dropdownItems,
                     onChanged: (value) {
                                 Navigator.of(context)
-                        //  .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
-                        .pushReplacement(MaterialPageRoute(builder: (context) => LocationWidget(student: student,)));
+                          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+                        
                       debugPrint('selected onchange: $value');
                       setState(
                         () {
@@ -86,6 +86,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                           student = value.toString();
                           setDefaultMake = false;
                           setDefaultMakeModel = true;
+                          //loc(student);
                         },
                       );
                     },
@@ -97,5 +98,9 @@ class _StudentDropdownState extends State<StudentDropdown> {
         ],
       ),
     );
+  }
+  Future<String> loc(String student)async{
+    String loc = await LocationWidget(stu: student).getLocation();
+    return loc;
   }
 }
