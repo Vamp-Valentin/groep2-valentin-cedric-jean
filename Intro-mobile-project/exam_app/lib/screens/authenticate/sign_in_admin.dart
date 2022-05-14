@@ -81,6 +81,11 @@ class _SignInAdminState extends State<SignInAdmin> {
           hintText: "Password",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
+    SizedBox(
+      height: 20,
+      );
+    forgetPassword(context);
+    
 
     //button
     final loginButton = Material(
@@ -149,6 +154,29 @@ class _SignInAdminState extends State<SignInAdmin> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
+                            
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Forgot Password? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Register()));
+                            },
+                            child: Text(
+                              "Change",
+                              style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            
                           )
                         ],
                       )
@@ -157,5 +185,20 @@ class _SignInAdminState extends State<SignInAdmin> {
             ),
           )),
         ));
+  }
+
+  Widget forgetPassword(BuildContext context){
+    return Container(width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: const Text(
+          "Forgot Password?",
+          style: TextStyle(color: Colors.black), 
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () {},
+      ),
+    );
   }
 }

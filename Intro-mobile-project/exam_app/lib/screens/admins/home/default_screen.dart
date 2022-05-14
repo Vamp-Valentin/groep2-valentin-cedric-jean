@@ -114,6 +114,27 @@ class _HomeAdminState extends State<HomeAdmin> {
       ),
     );
 
+    //change password button
+    final passwordButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Exam()));
+        },
+        child: Text(
+          "Change Password",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return StreamProvider<List<MyExam>?>.value(
       initialData: [],
       value: DatabaseService().exams,
