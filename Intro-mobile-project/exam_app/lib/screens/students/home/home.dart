@@ -54,8 +54,8 @@ class _HomeState extends State<Home> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: ()async {
           Navigator.of(context).pushReplacement(
-              // MaterialPageRoute(builder: (context) => StartExam()));
-              MaterialPageRoute(builder: (context) => TimerWidget()));
+               MaterialPageRoute(builder: (context) => CompleteExam()));
+              //MaterialPageRoute(builder: (context) => TimerWidget()));
         },
         child: Text(
           "Start exam",

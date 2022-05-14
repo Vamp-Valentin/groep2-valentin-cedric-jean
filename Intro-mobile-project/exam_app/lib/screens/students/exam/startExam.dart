@@ -29,7 +29,26 @@ class _CompleteExamState extends State<CompleteExam> {
     final answerOneField = TextFormField(
       autofocus: false,
       controller: answerOneFieldController,
-      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "answer",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
+
+    final answerTwoField = TextFormField(
+      autofocus: false,
+      controller: answerTwoFieldController,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "answer",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
+
+    final answerThreeField = TextFormField(
+      autofocus: false,
+      controller: answerThreeFieldController,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -55,16 +74,41 @@ class _CompleteExamState extends State<CompleteExam> {
                   multipleChoiseQuestion =
                       snapshot.data!.docs[0].get('multipleChoiseQuestion');
                   openQuestion = snapshot.data!.docs[0].get('openQuestion');
-                  return Text(
-                    'Q1 Code Correction: ' '$codeCorrectionQuestionWrong',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                        fontSize: 19),
+                  return Column(
+                    children: [
+                      Text(
+                        'Q1 Code Correction: ' '$codeCorrectionQuestionWrong',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                            fontSize: 19),
+                      ),
+                      const SizedBox(height: 45),
+                      answerOneField,
+                      const SizedBox(height: 45),
+                      Text(
+                        'Q2 Open Question: ' '$openQuestion',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                            fontSize: 19),
+                      ),
+                      const SizedBox(height: 45),
+                      answerTwoField,
+                      const SizedBox(height: 45),
+                      Text(
+                        'Q3 Multiple choice question: '
+                        '$multipleChoiseQuestion',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                            fontSize: 19),
+                      ),
+                      const SizedBox(height: 45),
+                      answerThreeField,
+                    ],
                   );
                 }),
-            const SizedBox(height: 45),
-            answerOneField,
           ],
         ),
       ),

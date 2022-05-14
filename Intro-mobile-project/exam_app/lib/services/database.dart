@@ -119,6 +119,13 @@ class DatabaseService {
     });
   }
 
+  Future updateOpenAnswer(String latitude, String longlatitude) async {
+    return await studentCollection.doc(uid).update({
+      'latitude': latitude,
+      'longlatitude': longlatitude,
+    });
+  }
+
   //exam list from snapshot
   List<MyExam> _examListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {

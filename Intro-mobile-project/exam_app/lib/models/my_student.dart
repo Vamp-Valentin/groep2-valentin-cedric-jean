@@ -2,6 +2,9 @@ class MyStudent {
   final String? sNumber;
   final String? question;
   final String? answer;
+  //final String? openQuestion;
+  //final String? codeCorrectionQuestionWrong;
+  //final String? multipleChoiseAnswer;
   final int? timer;
   final String? latitude;
   final String? longlatitude;
