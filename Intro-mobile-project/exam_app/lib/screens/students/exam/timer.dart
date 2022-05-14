@@ -64,7 +64,7 @@ class _TimerWidgetState extends State<TimerWidget> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             StreamBuilder<QuerySnapshot>(
@@ -87,13 +87,13 @@ class _TimerWidgetState extends State<TimerWidget> {
                   // }
                   return Text(
                     '$hours:$minutes:$seconds',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                         fontSize: 50),
                   );
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

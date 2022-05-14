@@ -55,9 +55,9 @@ class _HomeState extends State<Home> {
         onPressed: ()async {
           Navigator.of(context).pushReplacement(
               // MaterialPageRoute(builder: (context) => StartExam()));
-              MaterialPageRoute(builder: (context) => TimerWidget()));
+              MaterialPageRoute(builder: (context) => CompleteExam()));
         },
-        child: Text(
+        child: const Text(
           "Start exam",
           textAlign: TextAlign.center,
           style: TextStyle(

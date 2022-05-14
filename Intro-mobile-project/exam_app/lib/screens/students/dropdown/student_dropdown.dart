@@ -55,7 +55,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                     debugPrint('setDefault make: $students');
                     if (students != null) {
                       for (int i = 0; i < students.length; i++) {
-                        splitList.add(students?[i]);
+                        splitList.add(students[i]);
                         debugPrint(splitList[i]);
                       }
                       student = splitList[0];

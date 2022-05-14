@@ -106,7 +106,7 @@ class _HomeAdminState extends State<HomeAdmin> {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => Exam()));
         },
-        child: Text(
+        child: const Text(
           "Exam preview",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -127,7 +127,7 @@ class _HomeAdminState extends State<HomeAdmin> {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => ChangePass()));
         },
-        child: Text(
+        child: const Text(
           "Change Password",
           textAlign: TextAlign.center,
           style: TextStyle(
