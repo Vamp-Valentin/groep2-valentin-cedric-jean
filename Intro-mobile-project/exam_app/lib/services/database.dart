@@ -111,15 +111,9 @@ class DatabaseService {
   }
 
   //update latitude
-  Future updateLatitude(String latitude) async {
+  Future updateLatitudeAndLonglatitude(String latitude, String longlatitude) async {
     return await studentCollection.doc(uid).update({
       'latitude': latitude,
-    });
-  }
-
-  //update longlatitude
-  Future updateLonglatitude(String longlatitude) async {
-    return await studentCollection.doc(uid).update({
       'longlatitude': longlatitude,
     });
   }

@@ -3,6 +3,7 @@ import 'package:exam_app/models/my_exam.dart';
 import 'package:exam_app/models/my_user.dart';
 import 'package:exam_app/screens/students/exam/timer.dart';
 import 'package:exam_app/screens/students/home/home.dart';
+import 'package:exam_app/screens/students/location/location.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,8 @@ class _StudentDropdownState extends State<StudentDropdown> {
                     items: dropdownItems,
                     onChanged: (value) {
                                 Navigator.of(context)
-                         .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+                        //  .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+                        .pushReplacement(MaterialPageRoute(builder: (context) => LocationWidget(student: student,)));
                       debugPrint('selected onchange: $value');
                       setState(
                         () {

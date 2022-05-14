@@ -111,4 +111,17 @@ class AuthService {
       return null;
     }
   }
+
+  Future getCurrentStudent(List students) async{
+    try{
+      for (var stu in students){
+        if (students.contains(stu)){
+          return stu;
+        }
+      }
+    } catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
 }

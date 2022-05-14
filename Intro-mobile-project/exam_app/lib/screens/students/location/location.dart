@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exam_app/models/my_student.dart';
+import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationWidget extends StatefulWidget {
-  const LocationWidget({Key? key}) : super(key: key);
+  const LocationWidget({Key? key, this.student}) : super(key: key);
+  final String? student;
 
   @override
   State<LocationWidget> createState() => _LocationWidgetState();
@@ -12,13 +16,19 @@ class LocationWidget extends StatefulWidget {
 
 class _LocationWidgetState extends State<LocationWidget> {
 
-  Position? position;
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
 
-  function() async {
-    
+  }
+
+  Position? position;
+  final AuthService _auth = AuthService();
+
+  getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
-
     String latitude;
     String longlatitude;
 
@@ -66,17 +76,44 @@ class _LocationWidgetState extends State<LocationWidget> {
       position = currentPosition;
 
       latitude = currentPosition.latitude.toString();
-          // DatabaseService(uid: user.uid).updateCodeCorrectionQuestion(wrongCodeEditingController.text, correctCodeEditingController.text);
-          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainQuestions()));
       longlatitude = currentPosition.longitude.toString();
-
-      print(latitude);
+            print(latitude);
       print(longlatitude);
+      DatabaseService(uid: "").updateLatitudeAndLonglatitude(currentPosition.latitude.toString(), currentPosition.longitude.toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // String student = "";
+    // return Scaffold(
+    //   body: Center(
+    //     child: Column(
+    //       children: [
+    //         SizedBox(
+    //           height: 50,
+    //         ),
+    //         StreamBuilder<QuerySnapshot>(
+    //             stream:
+    //                 FirebaseFirestore.instance.collection('students').snapshots(),
+    //             builder: (BuildContext context,
+    //                 AsyncSnapshot<QuerySnapshot> snapshot) {
+    //               if (!snapshot.hasData) return Container();
+    //               student = snapshot.data!.docs[0].get('sNumber');
+                  
+    //               return Text(
+    //                 '$student',
+    //                 style: TextStyle(
+    //                     fontWeight: FontWeight.bold,
+    //                     color: Colors.black,
+    //                     fontSize: 50),
+    //               );
+    //             }),
+    //         SizedBox(height: 20),
+    //       ],
+    //     ),
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
         title: Text("Geolocator Package in Flutter"),
@@ -89,7 +126,7 @@ class _LocationWidgetState extends State<LocationWidget> {
             Text(position == null ? "Location" : position.toString()),
             ElevatedButton(
               onPressed: () {
-                function();
+                getLocation();
               },
               child: Text("Get Location"),
             ),

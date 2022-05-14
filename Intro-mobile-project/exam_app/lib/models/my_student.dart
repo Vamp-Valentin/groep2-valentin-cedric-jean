@@ -14,7 +14,7 @@ class MyStudent {
       sNumber: map['sNumber'],
       question: map['email'],
       answer: map['firstName'],
-      timer: map['lastName'],
+      timer: map['timer'],
       latitude: map['latitude'],
       longlatitude: map['longlatitude'],
     );

@@ -8,6 +8,7 @@ import 'package:exam_app/screens/authenticate/sign_in_student.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/screens/students/exam/startExam.dart';
 import 'package:exam_app/screens/students/exam/timer.dart';
+import 'package:exam_app/screens/students/location/location.dart';
 import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -95,8 +96,8 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 10,
               ),
-              
-              examButton
+              examButton,
+              LocationWidget(),
               
             ],
           ),
