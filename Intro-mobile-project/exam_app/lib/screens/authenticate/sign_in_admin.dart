@@ -95,7 +95,7 @@ class _SignInAdminState extends State<SignInAdmin> {
             dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
           }
         },
-        child: Text(
+        child: const Text(
           "Login",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -111,7 +111,7 @@ class _SignInAdminState extends State<SignInAdmin> {
               child: Container(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(36.0),
+              padding: const EdgeInsets.all(50.0),
               child: Form(
                   key: _formkey,
                   child: Column(
@@ -142,7 +142,7 @@ class _SignInAdminState extends State<SignInAdmin> {
                                   MaterialPageRoute(
                                       builder: (context) => Register()));
                             },
-                            child: Text(
+                            child: const Text(
                               "SignUp",
                               style: TextStyle(
                                   color: Colors.redAccent,

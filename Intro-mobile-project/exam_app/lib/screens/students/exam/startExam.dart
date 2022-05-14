@@ -18,6 +18,25 @@ class _CompleteExamState extends State<CompleteExam> {
     String codeCorrectionQuestionWrong = "";
     String multipleChoiseQuestion = "";
     String openQuestion = "";
+
+    final TextEditingController answerOneFieldController =
+        new TextEditingController();
+    final TextEditingController answerTwoFieldController =
+        new TextEditingController();
+    final TextEditingController answerThreeFieldController =
+        new TextEditingController();
+
+    final answerOneField = TextFormField(
+      autofocus: false,
+      controller: answerOneFieldController,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "answer",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+    );
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -37,13 +56,15 @@ class _CompleteExamState extends State<CompleteExam> {
                       snapshot.data!.docs[0].get('multipleChoiseQuestion');
                   openQuestion = snapshot.data!.docs[0].get('openQuestion');
                   return Text(
-                    '$codeCorrectionQuestionWrong',
+                    'Q1 Code Correction: ' '$codeCorrectionQuestionWrong',
                     style: const TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.black,
-                        fontSize: 25),
+                        fontSize: 19),
                   );
                 }),
+            const SizedBox(height: 45),
+            answerOneField,
           ],
         ),
       ),
