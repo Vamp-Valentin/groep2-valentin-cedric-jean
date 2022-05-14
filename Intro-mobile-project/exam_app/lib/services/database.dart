@@ -112,6 +112,7 @@ class DatabaseService {
 
   //update latitude
   Future updateLatitudeAndLonglatitude(String latitude, String longlatitude) async {
+    debugPrint(uid);
     return await studentCollection.doc(uid).update({
       'latitude': latitude,
       'longlatitude': longlatitude,

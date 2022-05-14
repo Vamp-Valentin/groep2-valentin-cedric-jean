@@ -19,6 +19,7 @@ class StudentDropdown extends StatefulWidget {
 class _StudentDropdownState extends State<StudentDropdown> {
   var students, carMakeModel;
   var setDefaultMake = true, setDefaultMakeModel = true;
+  LocationFunc loc = LocationFunc();
     // User? user = FirebaseAuth.instance.currentUser;
     // MyUser loggedInUser = MyUser();
     // MyExam exam = MyExam();
@@ -86,7 +87,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                           student = value.toString();
                           setDefaultMake = false;
                           setDefaultMakeModel = true;
-                          //loc(student);
+                          loc.getLocation(student);
                         },
                       );
                     },
@@ -98,10 +99,5 @@ class _StudentDropdownState extends State<StudentDropdown> {
         ],
       ),
     );
-  }
-  Future<String> loc(String student)async{
-    String loc = await LocationWidget(stu: student).getLocation();
-    debugPrint(loc);
-    return loc;
   }
 }
