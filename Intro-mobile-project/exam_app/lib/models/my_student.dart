@@ -12,8 +12,8 @@ class MyStudent {
   factory MyStudent.fromMap(map){
     return MyStudent(
       sNumber: map['sNumber'],
-      question: map['email'],
-      answer: map['firstName'],
+      question: map['question'],
+      answer: map['answer'],
       timer: map['timer'],
       latitude: map['latitude'],
       longlatitude: map['longlatitude'],

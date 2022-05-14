@@ -101,6 +101,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
   }
   Future<String> loc(String student)async{
     String loc = await LocationWidget(stu: student).getLocation();
+    debugPrint(loc);
     return loc;
   }
 }
