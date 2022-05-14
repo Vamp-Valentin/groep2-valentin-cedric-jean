@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_student.dart';
+import 'package:exam_app/screens/students/home/home.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 
 class CompleteExam extends StatefulWidget {
@@ -17,6 +19,7 @@ class _CompleteExamState extends State<CompleteExam> {
   Widget build(BuildContext context) {
     String codeCorrectionQuestionWrong = "";
     String multipleChoiseQuestion = "";
+    String multipleChoisePossibilities = "";
     String openQuestion = "";
 
     final TextEditingController answerOneFieldController =
@@ -56,6 +59,31 @@ class _CompleteExamState extends State<CompleteExam> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 
+    //save button
+    final saveButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          DatabaseService(uid: "S384235").updateAnswers(
+              answerOneFieldController.text,
+              answerTwoFieldController.text,
+              answerThreeFieldController.text);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        },
+        child: Text(
+          "save",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -73,6 +101,7 @@ class _CompleteExamState extends State<CompleteExam> {
                       snapshot.data!.docs[0].get('codeCorrectionQuestionWrong');
                   multipleChoiseQuestion =
                       snapshot.data!.docs[0].get('multipleChoiseQuestion');
+                  multipleChoisePossibilities = snapshot.data!.docs[0].get('multipleChoisePossibilities');
                   openQuestion = snapshot.data!.docs[0].get('openQuestion');
                   return Column(
                     children: [
@@ -85,6 +114,7 @@ class _CompleteExamState extends State<CompleteExam> {
                       ),
                       const SizedBox(height: 45),
                       answerOneField,
+                      Divider(color: Colors.black),
                       const SizedBox(height: 45),
                       Text(
                         'Q2 Open Question: ' '$openQuestion',
@@ -95,10 +125,11 @@ class _CompleteExamState extends State<CompleteExam> {
                       ),
                       const SizedBox(height: 45),
                       answerTwoField,
+                      Divider(color: Colors.black),
                       const SizedBox(height: 45),
                       Text(
                         'Q3 Multiple choice question: '
-                        '$multipleChoiseQuestion',
+                        '$multipleChoiseQuestion\n\n ${splitAnswer(multipleChoisePossibilities)}',
                         style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             color: Colors.black,
@@ -106,6 +137,9 @@ class _CompleteExamState extends State<CompleteExam> {
                       ),
                       const SizedBox(height: 45),
                       answerThreeField,
+                      Divider(color: Colors.black),
+                      const SizedBox(height: 80),
+                      saveButton
                     ],
                   );
                 }),
@@ -113,5 +147,9 @@ class _CompleteExamState extends State<CompleteExam> {
         ),
       ),
     );
+  }
+
+  String splitAnswer(String answer) {
+    return answer.replaceAll(";", "\n\n");
   }
 }

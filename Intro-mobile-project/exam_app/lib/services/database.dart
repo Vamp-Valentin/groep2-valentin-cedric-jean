@@ -16,11 +16,13 @@ class DatabaseService {
 
   //update all
   Future updateStudentData(String? sNumber, String? question,
-      String? answer, int? timer, String? latitude, String? longlatitude) async {
+      String? openAnswer,String? codeCorrectionAnswer,String? multipleChoiseAnswer, int? timer, String? latitude, String? longlatitude) async {
     return await studentCollection.doc(sNumber).set({
       'sNumber': sNumber,
       'question': question,
-      'answer': answer,
+      'openAnswer': openAnswer,
+      'codeCorrectionAnswer': codeCorrectionAnswer,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
       'timer': timer,
       'latitude' : latitude,
       'longlatitude' : longlatitude,
@@ -119,10 +121,11 @@ class DatabaseService {
     });
   }
 
-  Future updateOpenAnswer(String latitude, String longlatitude) async {
+  Future updateAnswers(String openAnswer, String codeCorrectionAnswer, String multipleChoiseAnswer) async {
     return await studentCollection.doc(uid).update({
-      'latitude': latitude,
-      'longlatitude': longlatitude,
+      'openAnswer': openAnswer,
+      'codeCorrectionAnswer': codeCorrectionAnswer,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
     });
   }
 
