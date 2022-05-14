@@ -12,8 +12,7 @@ class ChangePass extends StatefulWidget {
 }
 
 class _ChangePassState extends State<ChangePass> {
-  @override
-  Widget build(BuildContext context) {
+
 
     final formkey = GlobalKey<FormState>();
 
@@ -41,18 +40,16 @@ class _ChangePassState extends State<ChangePass> {
             content: Text(' Your password has been Changed.. Login again!'),
          ),
          );
-      } catch(error){
-
-      }
+      } catch(error){ }
     }
 
-    ElevatedButton (onPressed: (){
-      if(_formkey.currentState!.validate()){
-          setState((){
-          newPassword=newPasswordController.text;
-        });
-          changePassword();
-        }
-      });
-  }
+  //       ElevatedButton (onPressed: (){
+  //     if(_formkey.currentState!.validate()){
+  //         setState((){
+  //         newPassword=newPasswordController.text;
+  //       });
+  //         changePassword();
+  //       }
+  //     });
+  // }
 }
