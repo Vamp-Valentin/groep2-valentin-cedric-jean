@@ -168,16 +168,7 @@ class _MainQuestionsState extends State<MainQuestions> {
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
           //postDetailsToFirestore();
-          DatabaseService(uid: user.uid).updateUserData(
-              examNameEditingController.text,
-              "openQuestion",
-              "codeCorrectionQuestionWrong",
-              "codeCorrectionQuestionCorrect",
-              "multipleChoiseQuestion",
-              "multipleChoisePossibilities",
-              "multipleChoiseAnswer",
-              "students",
-              10);
+          DatabaseService(uid: user.uid).updateExamName(examNameEditingController.text);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },

@@ -94,4 +94,21 @@ class AuthService {
       return null;
     }
   }
+
+  Future changePassword(String newPassword) async {
+    try {
+      return await _auth.currentUser!
+          .updatePassword(newPassword)
+          .then((value) => signOut())
+          .then((value) => {
+                Fluttertoast.showToast(msg: "Password changed!"),
+              })
+              .catchError((e){
+                Fluttertoast.showToast(msg: e!.message);
+              });
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

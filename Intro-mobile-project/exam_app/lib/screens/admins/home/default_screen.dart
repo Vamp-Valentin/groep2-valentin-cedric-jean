@@ -1,4 +1,5 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/change_password/change_pass.dart';
 import 'package:exam_app/screens/admins/exam_preview/exam.dart';
 import 'package:exam_app/screens/admins/exam_preview/exam_preview.dart';
 import 'package:exam_app/screens/admins/home/homeAdmin.dart';
@@ -124,7 +125,7 @@ class _HomeAdminState extends State<HomeAdmin> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Exam()));
+              MaterialPageRoute(builder: (context) => ChangePass()));
         },
         child: Text(
           "Change Password",
@@ -173,6 +174,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                     SizedBox(height: 25),
                     previewButton,
                     SizedBox(height: 25),
+                    passwordButton
                   ],
                 )),
               ),
