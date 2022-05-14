@@ -16,12 +16,14 @@ class DatabaseService {
 
   //update all
   Future updateStudentData(String? sNumber, String? question,
-      String? answer, int? timer) async {
+      String? answer, int? timer, String? latitude, String? longlatitude) async {
     return await studentCollection.doc(sNumber).set({
       'sNumber': sNumber,
       'question': question,
       'answer': answer,
       'timer': timer,
+      'latitude' : latitude,
+      'longlatitude' : longlatitude,
     });
   }
 
@@ -105,6 +107,20 @@ class DatabaseService {
   Future updateStudents(String students) async {
     return await examCollection.doc(uid).update({
       'students': students,
+    });
+  }
+
+  //update latitude
+  Future updateLatitude(String latitude) async {
+    return await studentCollection.doc(uid).update({
+      'latitude': latitude,
+    });
+  }
+
+  //update longlatitude
+  Future updateLonglatitude(String longlatitude) async {
+    return await studentCollection.doc(uid).update({
+      'longlatitude': longlatitude,
     });
   }
 

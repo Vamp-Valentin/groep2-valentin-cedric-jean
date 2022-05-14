@@ -22,7 +22,7 @@ class _StudentListState extends State<StudentList> {
       for (var stu in splitStudents(ex.students.toString())) {
         stulist.add(stu);
         DatabaseService(uid: stu)
-            .updateStudentData(stu, "question", "answer", 10);
+            .updateStudentData(stu, "question", "answer", 10 , "lat", "longlat");
       }
     }
     for (int i = 0; i < stulist.length; i++) {
