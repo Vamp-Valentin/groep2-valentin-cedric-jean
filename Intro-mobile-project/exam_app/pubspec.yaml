@@ -40,7 +40,6 @@ dependencies:
   provider: ^6.0.2
   fluttertoast: ^8.0.9
   geolocator: ^8.2.0
-  flutter_osm_plugin: ^0.34.0+1
 
 dev_dependencies:
   flutter_test:
