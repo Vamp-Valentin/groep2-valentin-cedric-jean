@@ -10,8 +10,9 @@ class MyStudent {
   final String? longlatitude;
   final int? result;
   final String? address;
+  final int? timesLeft;
 
-  MyStudent({this.sNumber, this.question, this.openAnswer,this.codeCorrectionAnswer, this.multipleChoiseAnswer, this.timer, this.latitude, this.longlatitude, this.result, this.address});
+  MyStudent({this.sNumber, this.question, this.openAnswer,this.codeCorrectionAnswer, this.multipleChoiseAnswer, this.timer, this.latitude, this.longlatitude, this.result, this.address, this.timesLeft});
 
   //get data from database
   factory MyStudent.fromMap(map) {
@@ -26,6 +27,7 @@ class MyStudent {
       longlatitude: map['longlatitude'],
       result: map['result'],
       address: map['address'],
+      timesLeft: map['timesLeft'],
     );
   }
 }

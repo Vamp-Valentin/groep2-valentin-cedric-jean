@@ -25,7 +25,8 @@ class DatabaseService {
       String? latitude,
       String? longlatitude,
       int? result,
-      String? address) async {
+      String? address,
+      int? timesLeft) async {
     return await studentCollection.doc(sNumber).set({
       'sNumber': sNumber,
       'question': question,
@@ -37,6 +38,7 @@ class DatabaseService {
       'longlatitude': longlatitude,
       'result': result,
       'address': address,
+      'timesLeft': timesLeft,
     });
   }
 
@@ -146,6 +148,16 @@ class DatabaseService {
     debugPrint(uid);
     return await studentCollection.doc(uid).update({
       'address': address,
+    });
+  }
+
+  //update address
+  Future updateTimesLeft(
+      int timesLeft) async {
+        int counter = 0;
+        counter += timesLeft;
+    return await studentCollection.doc(uid).update({
+      'timesLeft': counter,
     });
   }
 

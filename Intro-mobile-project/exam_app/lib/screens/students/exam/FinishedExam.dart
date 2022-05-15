@@ -1,17 +1,15 @@
 import 'package:exam_app/screens/students/home/home.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:exam_app/variables.dart';
 
-class FinishedExam extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return FinishedExamState();
-  }
-}
 
-class FinishedExamState extends State<FinishedExam> {
-  @override
+class FinishedExam extends StatelessWidget {
+  const FinishedExam({Key? key, required this.student}) : super(key: key);
+  final String student;
+
+@override
   Widget build(BuildContext context) {
     final leaveButton = Material(
       elevation: 5,
@@ -22,8 +20,9 @@ class FinishedExamState extends State<FinishedExam> {
         minWidth: 350,
         onPressed: () {
           counter = 0;
+          DatabaseService(uid: student).updateTimesLeft(counter);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => const HomeStudent(student: "",)));
+              context, MaterialPageRoute(builder: (context) => HomeStudent(student: student)));
         },
         child: const Text(
           "go to Home page",
@@ -85,22 +84,5 @@ class FinishedExamState extends State<FinishedExam> {
         ),
       ),
     ));
-
-    /*return const Scaffold(
-      children: [
-        Text(
-          "Exam ended succesfully!",
-              style: TextStyle(
-                fontSize: 19
-              )
-        ),
-        Text(
-          "Left exam: " "$counter",
-          style: TextStyle(
-            fontSize: 19
-          )
-        )
-      ],
-    );*/
-  }
+}
 }
