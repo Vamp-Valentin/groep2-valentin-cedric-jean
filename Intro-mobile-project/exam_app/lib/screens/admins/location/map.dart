@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
+import 'package:geocoder/geocoder.dart';
 
 import '../../../models/my_exam.dart';
 
 class MapWidget extends StatelessWidget {
   const MapWidget(
-      {Key? key, required this.latitude, required this.longlatitude})
+      {Key? key,
+      required this.latitude,
+      required this.longlatitude,
+      required this.address})
       : super(key: key);
   final double latitude;
   final double longlatitude;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,7 @@ class MapWidget extends StatelessWidget {
             ),
           ],
         ),
+        bottomSheet: BottomAppBar(child: Text(address.toString())),
       ),
     );
   }

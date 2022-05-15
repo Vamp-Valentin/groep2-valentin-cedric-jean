@@ -5,6 +5,7 @@ import 'package:exam_app/models/my_student.dart';
 import 'package:exam_app/screens/admins/location/map.dart';
 import 'package:exam_app/screens/admins/results/results.dart';
 import 'package:exam_app/screens/students/home/home.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoder/geocoder.dart';
@@ -17,22 +18,13 @@ class LocationOnMap extends StatelessWidget {
   const LocationOnMap({Key? key, required this.student}) : super(key: key);
   final String student;
 
-  // @override
-  // State<LocationOnMap> createState() => _LocationOnMapState();
-
-  //   _locationToAdress() async
-  //     {
-  //       final coordinates = new Coordinates(51.3012, 4.4891);
-  //       var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
-  //       var first = addresses.first;
-  //       print("${first.featureName} : ${first.addressLine}");
-  //     }
-}
-
-class _LocationOnMapState extends State<LocationOnMap> {
+  @override
   Widget build(BuildContext context) {
+
     double lat = 37.4219983;
     double longlat = -122.084;
+    String address = " ";
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -42,10 +34,10 @@ class _LocationOnMapState extends State<LocationOnMap> {
                 context, MaterialPageRoute(builder: (context) => Results())),
           ),
           backgroundColor: Colors.red,
-          title: Text("location"),
+          title: Text("Location"),
           centerTitle: true,
         ),
-        body: StreamBuilder<QuerySnapshot>(
+        body: StreamBuilder<QuerySnapshot> (
             stream: FirebaseFirestore.instance
                 .collection('students')
                 .orderBy('sNumber')
@@ -57,10 +49,13 @@ class _LocationOnMapState extends State<LocationOnMap> {
               for (int i = 0; i < snapshot.data!.docs.length; i++) {
                 String stu = snapshot.data!.docs[i].get('sNumber');
                 if (stu == student) {
+
                   lat = double.parse(snapshot.data!.docs[i].get('latitude'));
                   longlat =
                       double.parse(snapshot.data!.docs[i].get('longlatitude'));
-                  return MapWidget(latitude: lat, longlatitude: longlat);
+                  locationToAdress(lat, longlat, stu);
+                  address = snapshot.data!.docs[i].get('address');
+                  return MapWidget(latitude: lat, longlatitude: longlat, address: address,);
                 }
               }
               return Container();
@@ -68,29 +63,13 @@ class _LocationOnMapState extends State<LocationOnMap> {
       ),
     );
   }
+
+  locationToAdress(double lat, double longlat, String student) async {
+    final coordinates = new Coordinates(lat, longlat);
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var first = addresses.first;
+    String addres = "${first.featureName} : ${first.addressLine}";
+    DatabaseService(uid: student).updateAddress(addres);
+    return addres;
+  }
 }
-              // new FlutterMap(
-              //   options: new MapOptions(
-              //     center: new LatLng(51.3012, 4.4891),
-              //     zoom: 15.0,
-              //   ),
-              //   layers: [
-              //     new TileLayerOptions(
-              //         urlTemplate:
-              //             "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-              //         subdomains: ['a', 'b', 'c']),
-              //     new MarkerLayerOptions(
-              //       markers: [
-              //         new Marker(
-              //           width: 40.0,
-              //           height: 40.0,
-              //           point: new LatLng(51.3012, 4.4891),
-              //           builder: (ctx) => new Container(
-              //               child: new Icon(
-              //             Icons.location_on,
-              //             color: Colors.red,
-              //           )),
-              //         ),
-              //       ],
-              //     ),
-              //   ],
