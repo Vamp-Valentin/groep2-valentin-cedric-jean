@@ -118,7 +118,8 @@ class _AddStudentState extends State<AddStudent> {
             "multiplAnswer",
             0,
             "latitude",
-            "longlatitude");
+            "longlatitude",
+            0.0);
       }
     }
     return splitList;

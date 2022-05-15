@@ -65,21 +65,22 @@ class _TimerWidgetState extends State<TimerWidget> {
             stream: FirebaseFirestore.instance.collection('exams').snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) return Container();
+              if (!snapshot.hasData) return Text("");
               minute = snapshot.data!.docs[0].get('timer');
               String minutes = strDigits(myDuration.inMinutes.remainder(minute));
-              return ListTile(
-                leading: Icon(Icons.flaky_outlined),
-                title: Text('$hours:$minutes:$seconds'),
-                tileColor: Colors.grey,
-              );
-              // Text(
-              //     '$hours:$minutes:$seconds',
-              //     style: TextStyle(
-              //         fontWeight: FontWeight.bold,
-              //         color: Colors.black,
-              //         fontSize: 50),
-              //   ),
+              // return ListTile(
+              //   leading: Icon(Icons.flaky_outlined),
+              //   title: Text('$hours:$minutes:$seconds'),
+              //   tileColor: Colors.grey,
+              // );
+              //return Text('$hours:$minutes:$seconds');
+              return Text(
+                  '$hours:$minutes:$seconds',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 10),
+                );
             }),
       ),
     );

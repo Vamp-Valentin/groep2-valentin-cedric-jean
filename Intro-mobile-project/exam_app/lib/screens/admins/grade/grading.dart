@@ -11,7 +11,7 @@ import 'package:latlong/latlong.dart';
 
 class Grading{
 
-  Future<int> gradeQuestion(String answer, String studentAnswer, int points) async {
+  int gradeQuestion(String answer, String studentAnswer, int points) {
     int result = 0;
     if (answer == studentAnswer){
       result += points;

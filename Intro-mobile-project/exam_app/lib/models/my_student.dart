@@ -8,8 +8,9 @@ class MyStudent {
   final int? timer;
   final String? latitude;
   final String? longlatitude;
+  final double? result;
 
-  MyStudent({this.sNumber, this.question, this.openAnswer,this.codeCorrectionAnswer, this.multipleChoiseAnswer, this.timer, this.latitude, this.longlatitude});
+  MyStudent({this.sNumber, this.question, this.openAnswer,this.codeCorrectionAnswer, this.multipleChoiseAnswer, this.timer, this.latitude, this.longlatitude, this.result});
 
     //get data from database
   factory MyStudent.fromMap(map){
@@ -22,6 +23,7 @@ class MyStudent {
       timer: map['timer'],
       latitude: map['latitude'],
       longlatitude: map['longlatitude'],
+      result: map['result'],
     );
   }
 }

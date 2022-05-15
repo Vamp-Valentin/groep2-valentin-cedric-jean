@@ -81,68 +81,71 @@ class CompleteExam extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            StreamBuilder<QuerySnapshot>(
-                stream:
-                    FirebaseFirestore.instance.collection('exams').snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (!snapshot.hasData) return Container();
-                  codeCorrectionQuestionWrong =
-                      snapshot.data!.docs[0].get('codeCorrectionQuestionWrong');
-                  multipleChoiseQuestion =
-                      snapshot.data!.docs[0].get('multipleChoiseQuestion');
-                  multipleChoisePossibilities =
-                      snapshot.data!.docs[0].get('multipleChoisePossibilities');
-                  openQuestion = snapshot.data!.docs[0].get('openQuestion');
-                  return Column(
-                    children: [
-                      Text(
-                        'Q1 Code Correction: ' '$codeCorrectionQuestionWrong',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                            fontSize: 19),
-                      ),
-                      const SizedBox(height: 45),
-                      answerOneField,
-                      Divider(color: Colors.black),
-                      const SizedBox(height: 40),
-                      Text(
-                        'Q2 Open Question: ' '$openQuestion',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                            fontSize: 19),
-                      ),
-                      const SizedBox(height: 45),
-                      answerTwoField,
-                      Divider(color: Colors.black),
-                      const SizedBox(height: 40),
-                      Text(
-                        'Q3 Multiple choice question: '
-                        '$multipleChoiseQuestion\n\n ${splitAnswer(multipleChoisePossibilities)}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                            fontSize: 19),
-                      ),
-                      const SizedBox(height: 45),
-                      answerThreeField,
-                      Divider(color: Colors.black),
-                      //const SizedBox(height: 45),
-                      saveButton
-                    ],
-                  );
-                }),
-          ],
+      //appBar: AppBar(title: Text("exam"),actions: [TimerWidget()],),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream:
+                      FirebaseFirestore.instance.collection('exams').snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    codeCorrectionQuestionWrong =
+                        snapshot.data!.docs[0].get('codeCorrectionQuestionWrong');
+                    multipleChoiseQuestion =
+                        snapshot.data!.docs[0].get('multipleChoiseQuestion');
+                    multipleChoisePossibilities =
+                        snapshot.data!.docs[0].get('multipleChoisePossibilities');
+                    openQuestion = snapshot.data!.docs[0].get('openQuestion');
+                    return Column(
+                      children: [
+                        Text(
+                          'Q1 Code Correction: ' '$codeCorrectionQuestionWrong',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 19),
+                        ),
+                        const SizedBox(height: 45),
+                        answerOneField,
+                        Divider(color: Colors.black),
+                        const SizedBox(height: 40),
+                        Text(
+                          'Q2 Open Question: ' '$openQuestion',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 19),
+                        ),
+                        const SizedBox(height: 45),
+                        answerTwoField,
+                        Divider(color: Colors.black),
+                        const SizedBox(height: 40),
+                        Text(
+                          'Q3 Multiple choice question: '
+                          '$multipleChoiseQuestion\n\n ${splitAnswer(multipleChoisePossibilities)}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 19),
+                        ),
+                        const SizedBox(height: 45),
+                        answerThreeField,
+                        Divider(color: Colors.black),
+                        const SizedBox(height: 45),
+                      ],
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
+      bottomSheet: saveButton,
     );
   }
 
