@@ -21,7 +21,7 @@ class _StudentListState extends State<StudentList> {
     final stulist = [];
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
-        if (stulist.contains(stu)) {
+        // if (stulist.contains(stu)) {
           stulist.add(stu);
           DatabaseService(uid: stu).updateStudentData(
               stu,
@@ -33,7 +33,7 @@ class _StudentListState extends State<StudentList> {
               "lat",
               "longlat");
         }
-      }
+      //}
     }
     for (int i = 0; i < stulist.length; i++) {
       return ListView.builder(

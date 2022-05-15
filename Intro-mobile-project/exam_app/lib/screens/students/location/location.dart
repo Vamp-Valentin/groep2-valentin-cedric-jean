@@ -7,10 +7,15 @@ import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
 
 class LocationFunc{
 
-    getLocation(String? student) async {
+  getAddress(String? lat, String? long, String? student) async{
+    print(getLocation(student));
+    
+  }
+  getLocation(String? student) async {
     Position? position;
     bool serviceEnabled;
     LocationPermission permission;
@@ -58,11 +63,13 @@ class LocationFunc{
 
     Position currentPosition = await Geolocator.getCurrentPosition();
 
-      position = currentPosition;
-      latitude = currentPosition.latitude.toString();
-      longlatitude = currentPosition.longitude.toString();
-      print(latitude);
-      print(longlatitude);
-      DatabaseService(uid: student).updateLatitudeAndLonglatitude(currentPosition.latitude.toString(), currentPosition.longitude.toString());
+    position = currentPosition;
+    latitude = currentPosition.latitude.toString();
+    longlatitude = currentPosition.longitude.toString();
+    print(latitude);
+    print(longlatitude);
+    DatabaseService(uid: student).updateLatitudeAndLonglatitude(
+        currentPosition.latitude.toString(),
+        currentPosition.longitude.toString());
   }
 }
