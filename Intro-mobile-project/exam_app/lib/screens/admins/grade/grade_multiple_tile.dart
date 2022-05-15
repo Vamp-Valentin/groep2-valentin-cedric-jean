@@ -34,7 +34,7 @@ class GradeMultipleTile extends StatelessWidget {
                   TextButton(
                     child: const Icon(Icons.delete),
                     onPressed: () {
-                      DatabaseService(uid: student).updateGrading(10.0);
+                      //DatabaseService(uid: student).updateGrading(10.0);
                     },
                   ),
                 ],

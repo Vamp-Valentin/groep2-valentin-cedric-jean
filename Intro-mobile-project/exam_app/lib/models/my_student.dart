@@ -8,7 +8,7 @@ class MyStudent {
   final int? timer;
   final String? latitude;
   final String? longlatitude;
-  final double? result;
+  final int? result;
 
   MyStudent({this.sNumber, this.question, this.openAnswer,this.codeCorrectionAnswer, this.multipleChoiseAnswer, this.timer, this.latitude, this.longlatitude, this.result});
 

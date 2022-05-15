@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exam_app/screens/admins/grade/auto_grade.dart';
 import 'package:exam_app/screens/admins/grade/grade_code_cor_tile.dart';
 import 'package:exam_app/screens/admins/grade/grade_multiple_tile.dart';
 import 'package:exam_app/screens/admins/grade/grade_open_tile.dart';
@@ -21,6 +22,7 @@ class GradeWidget extends StatelessWidget {
     String codeCorrectionQuestionAnswer = "";
     String multipleChoiseAnswerStudent = "";
     String openQuestionAnswer = "";
+    int score = 0;
 
     String multipleChoiseAnswer = "";
     String codeCorrectionQuestionCorrect = "";
@@ -28,6 +30,37 @@ class GradeWidget extends StatelessWidget {
     final editResult = new TextEditingController();
 
     Grading grading = Grading();
+
+    //save button
+    final saveButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width / 3,
+        onPressed: () async {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AutoGrade(
+                        codeCorrectionStudentAnswer:
+                            codeCorrectionQuestionAnswer,
+                        multipleChoiseStudentAnswer:
+                            multipleChoiseAnswerStudent,
+                        student: student,
+                        score: score,
+                      )));
+        },
+        child: Text(
+          "save",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -57,6 +90,7 @@ class GradeWidget extends StatelessWidget {
                   multipleChoiseAnswerStudent =
                       snapshot.data!.docs[i].get('multipleChoiseAnswer');
                   openQuestionAnswer = snapshot.data!.docs[i].get('openAnswer');
+                  score = snapshot.data!.docs[i].get('result');
                 }
               }
               return ListView.builder(
@@ -66,17 +100,18 @@ class GradeWidget extends StatelessWidget {
                     children: [
                       GradeOpenTile(
                         openQuestionAnswer: openQuestionAnswer,
-                        student: student, editResult: editResult,
+                        student: student,
+                        editResult: editResult,
                       ),
                       GradeMultipleTile(
                         multipleChoiseAnswer: multipleChoiseAnswerStudent,
                         student: student,
                       ),
                       GradeCodeCorrectionTile(
-                        codeCorrectioAnswer: codeCorrectionQuestionAnswer,
+                        codeCorrectionAnswer: codeCorrectionQuestionAnswer,
                         student: student,
-                        editResult: editResult,
                       ),
+                      saveButton,
                     ],
                   );
                 },

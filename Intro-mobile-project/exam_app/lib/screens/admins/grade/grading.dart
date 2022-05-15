@@ -11,10 +11,9 @@ import 'package:latlong/latlong.dart';
 
 class Grading{
 
-  int gradeQuestion(String answer, String studentAnswer, int points) {
-    int result = 0;
+  int gradeQuestion(String answer, String studentAnswer, int result) {
     if (answer == studentAnswer){
-      result += points;
+      result += 1;
     }
     return result;
   }

@@ -24,7 +24,7 @@ class DatabaseService {
       int? timer,
       String? latitude,
       String? longlatitude,
-      double? result) async {
+      int? result) async {
     return await studentCollection.doc(sNumber).set({
       'sNumber': sNumber,
       'question': question,
@@ -147,9 +147,9 @@ class DatabaseService {
     });
   }
 
-  Future updateGrading(double result) async {
+  Future updateGrading(int result, int startScore) async {
     return await studentCollection.doc(uid).update({
-      'result': result += result,
+      'result': startScore += result,
     });
   }
 

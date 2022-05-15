@@ -21,7 +21,6 @@ class GradeOpenTile extends StatelessWidget {
       keyboardType: TextInputType.number,
       onSaved: (value) {
         editResult.text = value!;
-        DatabaseService(uid: student).updateGrading(double.parse(value));
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -38,7 +37,7 @@ class GradeOpenTile extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
-          DatabaseService(uid: student).updateGrading(double.parse(editResult.text));
+          DatabaseService(uid: student).updateGrading(int.parse(editResult.text),0);
         },
         child: Text(
           "save",
