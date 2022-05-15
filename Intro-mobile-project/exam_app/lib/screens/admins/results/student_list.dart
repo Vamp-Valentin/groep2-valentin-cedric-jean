@@ -1,4 +1,5 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/grade/grade.dart';
 import 'package:exam_app/screens/admins/home/exam_tile.dart';
 import 'package:exam_app/screens/admins/location/location_on_map.dart';
 import 'package:exam_app/services/database.dart';
@@ -17,6 +18,7 @@ class _StudentListState extends State<StudentList> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController editResult = TextEditingController();
     final exams = Provider.of<List<MyExam>>(context);
     final stulist = [];
     for (var ex in exams) {
@@ -45,13 +47,13 @@ class _StudentListState extends State<StudentList> {
                   icon: Icon(Icons.map_sharp),
                   onPressed: () async {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LocationOnMap()));
+                        builder: (context) => LocationOnMap(student: stulist[index].toString())));
                   }),
               IconButton(
                   icon: Icon(Icons.edit),
                   onPressed: () async {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LocationOnMap()));
+                        builder: (context) => GradeWidget(student: stulist[index].toString())));
                   }),
             ]),
             shape: RoundedRectangleBorder(

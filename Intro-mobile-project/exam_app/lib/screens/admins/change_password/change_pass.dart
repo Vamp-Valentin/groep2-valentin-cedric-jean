@@ -1,3 +1,4 @@
+import 'package:exam_app/screens/admins/home/default_screen.dart';
 import 'package:exam_app/screens/authenticate/sign_in_default.dart';
 import 'package:exam_app/screens/students/home/home.dart';
 import 'package:exam_app/services/auth.dart';
@@ -27,7 +28,6 @@ class _ChangePassState extends State<ChangePass> {
 
   @override
   Widget build(BuildContext context) {
-
     //password field
     final passwordField = TextFormField(
       autofocus: false,
@@ -63,9 +63,10 @@ class _ChangePassState extends State<ChangePass> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {
           if (_formkey.currentState!.validate()) {
-            dynamic result = await _auth.changePassword(newPasswordController.text);
+            dynamic result =
+                await _auth.changePassword(newPasswordController.text);
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => defaultLoginPage()));
+                MaterialPageRoute(builder: (context) => defaultLoginPage()));
           }
         },
         child: Text(
@@ -78,6 +79,16 @@ class _ChangePassState extends State<ChangePass> {
     );
 
     return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => HomeAdmin())),
+          ),
+          backgroundColor: Colors.red,
+          title: Text("Change password"),
+          centerTitle: true,
+        ),
         backgroundColor: Colors.white,
         body: Center(
           child: SingleChildScrollView(
