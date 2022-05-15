@@ -54,7 +54,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                       students.add(snapshot.data!.docs[i].get('sNumber'));
                     }
                     debugPrint('setDefault make: $students');
-                    if (students != null) {
+                    if (students.isNotEmpty) {
                       for (int i = 0; i < students.length; i++) {
                         splitList.add(students?[i]);
                         debugPrint(splitList[i]);

@@ -21,9 +21,18 @@ class _StudentListState extends State<StudentList> {
     final stulist = [];
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
-        stulist.add(stu);
-        DatabaseService(uid: stu)
-            .updateStudentData(stu, "question", "openanswer","codecoransw","multiplAnswer", 10, "lat", "longlat");
+        if (stulist.contains(stu)) {
+          stulist.add(stu);
+          DatabaseService(uid: stu).updateStudentData(
+              stu,
+              "question",
+              "openanswer",
+              "codecoransw",
+              "multiplAnswer",
+              10,
+              "lat",
+              "longlat");
+        }
       }
     }
     for (int i = 0; i < stulist.length; i++) {
@@ -39,9 +48,12 @@ class _StudentListState extends State<StudentList> {
             ),
             title: Text(stulist[index]),
             trailing: Wrap(children: [
-              TextButton(child: Text("Location"), onPressed: ()async {
-              Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => LocationOnMap()));}),
+              TextButton(
+                  child: Text("Location"),
+                  onPressed: () async {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => LocationOnMap()));
+                  }),
               Icon(Icons.keyboard_arrow_right),
             ]),
           );

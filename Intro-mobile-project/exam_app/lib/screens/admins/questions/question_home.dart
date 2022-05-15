@@ -167,7 +167,6 @@ class _MainQuestionsState extends State<MainQuestions> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
-          //postDetailsToFirestore();
           DatabaseService(uid: user.uid).updateExamName(examNameEditingController.text);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin()));

@@ -115,7 +115,7 @@ class _CompleteExamState extends State<CompleteExam> {
                       const SizedBox(height: 45),
                       answerOneField,
                       Divider(color: Colors.black),
-                      const SizedBox(height: 45),
+                      const SizedBox(height: 40),
                       Text(
                         'Q2 Open Question: ' '$openQuestion',
                         style: const TextStyle(
@@ -126,7 +126,7 @@ class _CompleteExamState extends State<CompleteExam> {
                       const SizedBox(height: 45),
                       answerTwoField,
                       Divider(color: Colors.black),
-                      const SizedBox(height: 45),
+                      const SizedBox(height: 40),
                       Text(
                         'Q3 Multiple choice question: '
                         '$multipleChoiseQuestion\n\n ${splitAnswer(multipleChoisePossibilities)}',
@@ -138,7 +138,7 @@ class _CompleteExamState extends State<CompleteExam> {
                       const SizedBox(height: 45),
                       answerThreeField,
                       Divider(color: Colors.black),
-                      const SizedBox(height: 80),
+                      //const SizedBox(height: 45),
                       saveButton
                     ],
                   );

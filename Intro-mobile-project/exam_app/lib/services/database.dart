@@ -62,6 +62,13 @@ class DatabaseService {
   }
 
   //update open question
+  Future updateExamNameAndTime(String examName, String timer) async {
+    return await examCollection.doc(uid).update({
+      'examName': examName,
+      'timer': timer
+    });
+  }
+    //update open question
   Future updateExamName(String examName) async {
     return await examCollection.doc(uid).update({
       'examName': examName,

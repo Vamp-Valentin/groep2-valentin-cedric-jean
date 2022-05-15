@@ -55,7 +55,6 @@ class _HomeState extends State<Home> {
         onPressed: ()async {
           Navigator.of(context).pushReplacement(
                MaterialPageRoute(builder: (context) => CompleteExam()));
-              //MaterialPageRoute(builder: (context) => TimerWidget()));
         },
         child: Text(
           "Start exam",
