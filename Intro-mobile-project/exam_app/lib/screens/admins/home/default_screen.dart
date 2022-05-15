@@ -52,27 +52,6 @@ class _HomeAdminState extends State<HomeAdmin> {
       ),
     );
 
-    //students button
-    final studentButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
-      child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => AddStudent()));
-        },
-        child: Text(
-          "Grade",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-
     //results button
     final resultButton = Material(
       elevation: 5,
@@ -86,7 +65,7 @@ class _HomeAdminState extends State<HomeAdmin> {
               MaterialPageRoute(builder: (context) => Results()));
         },
         child: Text(
-          "Results",
+          "Grade",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -167,8 +146,6 @@ class _HomeAdminState extends State<HomeAdmin> {
                   children: <Widget>[
                     SizedBox(height: 25),
                     examButton,
-                    SizedBox(height: 25),
-                    studentButton,
                     SizedBox(height: 25),
                     resultButton,
                     SizedBox(height: 25),

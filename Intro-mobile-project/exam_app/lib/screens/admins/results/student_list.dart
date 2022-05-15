@@ -22,17 +22,10 @@ class _StudentListState extends State<StudentList> {
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
         // if (stulist.contains(stu)) {
-          stulist.add(stu);
-          DatabaseService(uid: stu).updateStudentData(
-              stu,
-              "question",
-              "openanswer",
-              "codecoransw",
-              "multiplAnswer",
-              10,
-              "lat",
-              "longlat");
-        }
+        stulist.add(stu);
+        DatabaseService(uid: stu).updateStudentData(stu, "question",
+            "openanswer", "codecoransw", "multiplAnswer", 10, "lat", "longlat");
+      }
       //}
     }
     for (int i = 0; i < stulist.length; i++) {
@@ -48,14 +41,27 @@ class _StudentListState extends State<StudentList> {
             ),
             title: Text(stulist[index]),
             trailing: Wrap(children: [
-              TextButton(
-                  child: Text("Location"),
+              IconButton(
+                  icon: Icon(Icons.map_sharp),
                   onPressed: () async {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => LocationOnMap()));
                   }),
-              Icon(Icons.keyboard_arrow_right),
+              IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () async {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => LocationOnMap()));
+                  }),
             ]),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black,
+              ),
+              borderRadius: BorderRadius.zero,
+            ),
+            selected: true,
+            selectedTileColor: Colors.grey[300],
           );
         },
       );
