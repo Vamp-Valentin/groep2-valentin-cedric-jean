@@ -1,35 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/models/my_student.dart';
 import 'package:exam_app/screens/students/dropdown/student_dropdown.dart';
+import 'package:exam_app/screens/students/home/home.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
 
-class LocationWidget extends StatefulWidget {
-  final getLocation;
-  final String? stu;
-  const LocationWidget({Key? key, this.getLocation, this.stu}) : super(key: key);
-  
+class LocationFunc{
 
-  @override
-  State<LocationWidget> createState() => _LocationWidgetState();
-}
-
-class _LocationWidgetState extends State<LocationWidget> {
-
-  @override
-  void initState() {
-    super.initState();
-    getLocation();
-
+  getAddress(String? lat, String? long, String? student) async{
+    print(getLocation(student));
+    
   }
-
-  Position? position;
-  final AuthService _auth = AuthService();
-
-  getLocation() async {
+  getLocation(String? student) async {
+    Position? position;
     bool serviceEnabled;
     LocationPermission permission;
     String latitude;
@@ -75,20 +62,14 @@ class _LocationWidgetState extends State<LocationWidget> {
     }
 
     Position currentPosition = await Geolocator.getCurrentPosition();
-    setState(() {
-      position = currentPosition;
 
-      latitude = currentPosition.latitude.toString();
-      longlatitude = currentPosition.longitude.toString();
-            print(latitude);
-      print(longlatitude);
-      print(StudentDropdown().student.toString());
-      DatabaseService(uid: StudentDropdown().student.toString()).updateLatitudeAndLonglatitude(currentPosition.latitude.toString(), currentPosition.longitude.toString());
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+    position = currentPosition;
+    latitude = currentPosition.latitude.toString();
+    longlatitude = currentPosition.longitude.toString();
+    print(latitude);
+    print(longlatitude);
+    DatabaseService(uid: student).updateLatitudeAndLonglatitude(
+        currentPosition.latitude.toString(),
+        currentPosition.longitude.toString());
   }
 }

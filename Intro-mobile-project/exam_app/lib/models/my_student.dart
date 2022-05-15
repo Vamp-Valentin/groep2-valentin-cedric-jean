@@ -1,7 +1,10 @@
 class MyStudent {
   final String? sNumber;
   final String? question;
-  final String? answer;
+  //final String? answer;
+  final String? openAnswer;
+  final String? codeCorrectionAnswer;
+  final String? multipleChoiseAnswer;
   final int? timer;
   final String? latitude;
   final String? longlatitude;
@@ -12,25 +15,27 @@ class MyStudent {
   MyStudent(
       {this.sNumber,
       this.question,
-      this.answer,
+      this.openAnswer,
+      this.codeCorrectionAnswer,
+      this.multipleChoiseAnswer,
+      this.codeCorrAnswer,
+      this.openChoiceAnswer,
+      this.multiChoiceAnswer,
       this.timer,
       this.latitude,
-      this.longlatitude,
-      this.multiChoiceAnswer,
-      this.codeCorrAnswer,
-      this.openChoiceAnswer});
+      this.longlatitude});
 
   //get data from database
   factory MyStudent.fromMap(map) {
     return MyStudent(
-        sNumber: map['sNumber'],
-        question: map['question'],
-        answer: map['answer'],
-        timer: map['timer'],
-        latitude: map['latitude'],
-        longlatitude: map['longlatitude'],
-        multiChoiceAnswer: map['multiChoiceAnswer'],
-        codeCorrAnswer: map['codeCoreAnswer'],
-        openChoiceAnswer: map['openChoiceAnswer']);
+      sNumber: map['sNumber'],
+      question: map['question'],
+      openAnswer: map['openAnswer'],
+      codeCorrectionAnswer: map['codeCorrectionAnswer'],
+      multipleChoiseAnswer: map['multipleChoiseAnswer'],
+      timer: map['timer'],
+      latitude: map['latitude'],
+      longlatitude: map['longlatitude'],
+    );
   }
 }

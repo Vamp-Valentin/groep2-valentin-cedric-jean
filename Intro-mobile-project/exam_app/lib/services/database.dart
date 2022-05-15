@@ -16,11 +16,13 @@ class DatabaseService {
 
   //update all
   Future updateStudentData(String? sNumber, String? question,
-      String? answer, int? timer, String? latitude, String? longlatitude) async {
+      String? openAnswer,String? codeCorrectionAnswer,String? multipleChoiseAnswer, int? timer, String? latitude, String? longlatitude) async {
     return await studentCollection.doc(sNumber).set({
       'sNumber': sNumber,
       'question': question,
-      'answer': answer,
+      'openAnswer': openAnswer,
+      'codeCorrectionAnswer': codeCorrectionAnswer,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
       'timer': timer,
       'latitude' : latitude,
       'longlatitude' : longlatitude,
@@ -60,6 +62,13 @@ class DatabaseService {
   }
 
   //update open question
+  Future updateExamNameAndTime(String examName, String timer) async {
+    return await examCollection.doc(uid).update({
+      'examName': examName,
+      'timer': timer
+    });
+  }
+    //update open question
   Future updateExamName(String examName) async {
     return await examCollection.doc(uid).update({
       'examName': examName,
@@ -112,9 +121,18 @@ class DatabaseService {
 
   //update latitude
   Future updateLatitudeAndLonglatitude(String latitude, String longlatitude) async {
+    debugPrint(uid);
     return await studentCollection.doc(uid).update({
       'latitude': latitude,
       'longlatitude': longlatitude,
+    });
+  }
+
+  Future updateAnswers(String openAnswer, String codeCorrectionAnswer, String multipleChoiseAnswer) async {
+    return await studentCollection.doc(uid).update({
+      'openAnswer': openAnswer,
+      'codeCorrectionAnswer': codeCorrectionAnswer,
+      'multipleChoiseAnswer': multipleChoiseAnswer,
     });
   }
 

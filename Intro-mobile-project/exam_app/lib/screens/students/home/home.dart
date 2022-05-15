@@ -19,8 +19,7 @@ import '../../admins/questions/question_home.dart';
 class Home extends StatefulWidget {
   //const Home({Key? key}) : super(key: key);
   final toggleView;
-  const Home({Key? key, this.toggleView}) : super(key: key);  
-  
+  const Home({Key? key, this.toggleView}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -34,13 +33,14 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    if(user?.uid != null){
-    FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then(
-        (value) => {
-              this.loggedInUser = MyUser.fromMap(value.data()),
-              setState(() {})
-            });
-  }}
+    if (user?.uid != null) {
+      FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then(
+          (value) => {
+                this.loggedInUser = MyUser.fromMap(value.data()),
+                setState(() {})
+              });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +52,8 @@ class _HomeState extends State<Home> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: ()async {
+        onPressed: () async {
           Navigator.of(context).pushReplacement(
-              // MaterialPageRoute(builder: (context) => StartExam()));
               MaterialPageRoute(builder: (context) => CompleteExam()));
         },
         child: const Text(
@@ -73,7 +72,7 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           ActionChip(
               label: Text("Logout"),
-              onPressed: () async{
+              onPressed: () async {
                 //logout(context);
                 _auth.signOut();
               })
@@ -97,7 +96,6 @@ class _HomeState extends State<Home> {
                 height: 10,
               ),
               examButton,
-              
             ],
           ),
         ),
