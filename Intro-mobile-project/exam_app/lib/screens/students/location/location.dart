@@ -11,10 +11,6 @@ import 'package:latlong/latlong.dart';
 
 class LocationFunc{
 
-  getAddress(String? lat, String? long, String? student) async{
-    print(getLocation(student));
-    
-  }
   getLocation(String? student) async {
     Position? position;
     bool serviceEnabled;

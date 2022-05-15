@@ -58,8 +58,9 @@ class _AddStudentState extends State<AddStudent> {
         onPressed: () async {
           DatabaseService(uid: user.uid)
               .updateStudents(addStudentsEditingController.text);
+          CreateStudents(addStudentsEditingController.text);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
+              context, MaterialPageRoute(builder: (context) => MainQuestions()));
         },
         child: Text(
           "save",
@@ -74,7 +75,7 @@ class _AddStudentState extends State<AddStudent> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomeAdmin())),
+                context, MaterialPageRoute(builder: (context) => MainQuestions())),
           ),
           backgroundColor: Colors.red,
           title: Text("Grade"),
@@ -101,5 +102,26 @@ class _AddStudentState extends State<AddStudent> {
             ),
           )),
         ));
+  }
+
+  List CreateStudents(String? students) {
+    List splitList = [];
+    final splitstudents = students?.split(';');
+    if (splitstudents != null) {
+      for (int i = 0; i < splitstudents.length; i++) {
+        splitList.add(splitstudents[i]);
+        DatabaseService(uid: splitstudents[i]).updateStudentData(
+            splitstudents[i],
+            "question",
+            "openanswer",
+            "codecoransw",
+            "multiplAnswer",
+            0,
+            "latitude",
+            "longlatitude",
+            0);
+      }
+    }
+    return splitList;
   }
 }

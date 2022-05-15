@@ -20,20 +20,6 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-  // User? user = FirebaseAuth.instance.currentUser;
-  // MyUser loggedInUser = MyUser();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if(user?.uid != null){
-  //     FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then(
-  //       (value) => {
-  //             this.loggedInUser = MyUser.fromMap(value.data()),
-  //             setState(() {})
-  //           });
-  //   }
-  // }
 
   bool showSignIn = true;
   void toggleView(){
@@ -46,7 +32,6 @@ class _AuthenticateState extends State<Authenticate> {
       return defaultLoginPage(toggleView: toggleView);
     }else{
       return HomeAdmin();
-      //toggleView: toggleView
     }
     }
   }
