@@ -68,10 +68,10 @@ class CompleteExam extends StatelessWidget {
               answerTwoFieldController.text,
               answerThreeFieldController.text);
           Navigator.pushReplacement(
-              //context, MaterialPageRoute(builder: (context) => FinishedExam()));
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeStudent(student: student)));
+              context, MaterialPageRoute(builder: (context) => FinishedExam()));
+              // context,
+              // MaterialPageRoute(
+              //     builder: (context) => HomeStudent(student: student)));
         },
         child: const Text(
           "save",

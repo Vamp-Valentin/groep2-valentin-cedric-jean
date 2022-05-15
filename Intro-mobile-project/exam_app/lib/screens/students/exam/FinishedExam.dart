@@ -23,7 +23,7 @@ class FinishedExamState extends State<FinishedExam> {
         onPressed: () {
           counter = 0;
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => const Home()));
+              context, MaterialPageRoute(builder: (context) => const HomeStudent(student: "",)));
         },
         child: const Text(
           "go to Home page",

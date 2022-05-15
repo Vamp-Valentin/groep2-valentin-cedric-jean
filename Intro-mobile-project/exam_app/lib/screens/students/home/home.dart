@@ -62,10 +62,32 @@ class HomeStudent extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              examButton,
             ],
           ),
-        );
+          body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 180,
+                child: Image.asset(
+                  "assets/apLogo.png",
+                  fit: BoxFit.contain,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              examButton,
+
+            ],
+          ),
+        ),
+      ),
+     );
   }
 
 // class Home extends StatefulWidget {
@@ -129,30 +151,30 @@ class HomeStudent extends StatelessWidget {
 //               })
 //         ],
 //       ),
-//       body: Center(
-//         child: Padding(
-//           padding: EdgeInsets.all(20),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: <Widget>[
-//               SizedBox(
-//                 height: 180,
-//                 child: Image.asset(
-//                   "assets/apLogo.png",
-//                   fit: BoxFit.contain,
-//                 ),
-//               ),
-//               SizedBox(
-//                 height: 10,
-//               ),
-//               examButton,
+    //   body: Center(
+    //     child: Padding(
+    //       padding: EdgeInsets.all(20),
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: <Widget>[
+    //           SizedBox(
+    //             height: 180,
+    //             child: Image.asset(
+    //               "assets/apLogo.png",
+    //               fit: BoxFit.contain,
+    //             ),
+    //           ),
+    //           SizedBox(
+    //             height: 10,
+    //           ),
+    //           examButton,
 
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    //  );
 //   }
 
   Future<void> logout(BuildContext context) async {
