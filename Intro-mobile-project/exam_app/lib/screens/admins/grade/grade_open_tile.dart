@@ -15,6 +15,7 @@ class GradeOpenTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final gradeField = TextFormField(
       autofocus: false,
       controller: editResult,
@@ -25,7 +26,6 @@ class GradeOpenTile extends StatelessWidget {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          //hintText: "Minutes",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 

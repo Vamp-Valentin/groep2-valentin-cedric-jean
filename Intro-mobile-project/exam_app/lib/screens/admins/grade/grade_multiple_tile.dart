@@ -29,16 +29,6 @@ class GradeMultipleTile extends StatelessWidget {
                 title: Text(multipleChoiseAnswer.toString()),
                 tileColor: Colors.green,
               ),
-              ButtonBar(
-                children: <Widget>[
-                  TextButton(
-                    child: const Icon(Icons.delete),
-                    onPressed: () {
-                      //DatabaseService(uid: student).updateGrading(10.0);
-                    },
-                  ),
-                ],
-              ),
             ],
           ),
         ));

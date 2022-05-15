@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/screens/admins/grade/grading.dart';
+import 'package:exam_app/screens/admins/results/results.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 
@@ -29,10 +30,18 @@ class AutoGrade extends StatelessWidget {
                   codeCorrectionAnswer = snapshot.data!.docs[i].get('codeCorrectionQuestionCorrect');
                   multiplechoiseAnswer = snapshot.data!.docs[i].get('multipleChoiseAnswer');
               }
-              total += grading.gradeQuestion(codeCorrectionAnswer, codeCorrectionStudentAnswer, score);
-              total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, score);
+              debugPrint("score: " + score.toString());
+              debugPrint("total: " + score.toString());
+              total = grading.gradeQuestion(codeCorrectionAnswer, codeCorrectionStudentAnswer, score);
+              debugPrint("score: " + score.toString());
+              debugPrint("total: " + score.toString());
+              total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, total);
+              debugPrint("score: " + score.toString());
+              debugPrint("total: " + score.toString());
+              
+              
               DatabaseService(uid: student).updateGrading(total, score);
-              return Container();
+              return Results();
             }),
       ),
     );

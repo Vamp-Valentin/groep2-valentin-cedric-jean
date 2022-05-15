@@ -13,7 +13,7 @@ class Grading{
 
   int gradeQuestion(String answer, String studentAnswer, int result) {
     if (answer == studentAnswer){
-      result += 1;
+      result = 1;
     }
     return result;
   }

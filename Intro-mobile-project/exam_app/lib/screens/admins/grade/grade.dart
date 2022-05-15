@@ -98,6 +98,7 @@ class GradeWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
+                      Text("Result: " + score.toString()),
                       GradeOpenTile(
                         openQuestionAnswer: openQuestionAnswer,
                         student: student,
@@ -111,6 +112,7 @@ class GradeWidget extends StatelessWidget {
                         codeCorrectionAnswer: codeCorrectionQuestionAnswer,
                         student: student,
                       ),
+                      SizedBox(height: 25,),
                       saveButton,
                     ],
                   );
