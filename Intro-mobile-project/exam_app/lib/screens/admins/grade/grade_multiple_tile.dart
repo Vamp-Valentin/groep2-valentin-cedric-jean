@@ -21,7 +21,7 @@ class GradeMultipleTile extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(Icons.question_mark_outlined),
-                title: Text(multipleChoiseAnswer.toString()),
+                title: Text("Wat is je favoriete dier?"),
                 tileColor: Colors.redAccent,
               ),
               ListTile(

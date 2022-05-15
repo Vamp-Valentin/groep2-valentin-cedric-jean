@@ -26,7 +26,7 @@ class GradeCodeCorrectionTile extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(Icons.question_mark_outlined),
-                title: Text(codeCorrectionAnswer.toString()),
+                title: Text("Print("");"),
                 tileColor: Colors.redAccent,
               ),
               ListTile(

@@ -62,7 +62,7 @@ class GradeOpenTile extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(Icons.question_mark_outlined),
-                title: Text(openQuestionAnswer.toString()),
+                title: Text("Hoe gaat het?"),
                 tileColor: Colors.redAccent,
               ),
               ListTile(
