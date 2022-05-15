@@ -20,7 +20,6 @@ class FinishedExam extends StatelessWidget {
         minWidth: 350,
         onPressed: () {
           counter = 0;
-          DatabaseService(uid: student).updateTimesLeft(counter);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeStudent(student: student)));
         },

@@ -1,6 +1,7 @@
 import 'package:exam_app/screens/wrapper.dart';
 import 'package:exam_app/services/auth.dart';
 import 'package:exam_app/models/my_user.dart';
+import 'package:exam_app/services/database.dart';
 import 'package:exam_app/variables.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     print('AppLifeCycleState: $state');
     if (state == AppLifecycleState.inactive) {
       counter += 1;
+      DatabaseService(uid: "S384235").updateTimesLeft(counter);
     }
   }
 

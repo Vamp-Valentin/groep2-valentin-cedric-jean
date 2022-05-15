@@ -23,6 +23,7 @@ class GradeWidget extends StatelessWidget {
     String multipleChoiseAnswerStudent = "";
     String openQuestionAnswer = "";
     int score = 0;
+    int timesLeft = 0;
 
     String multipleChoiseAnswer = "";
     String codeCorrectionQuestionCorrect = "";
@@ -91,6 +92,7 @@ class GradeWidget extends StatelessWidget {
                       snapshot.data!.docs[i].get('multipleChoiseAnswer');
                   openQuestionAnswer = snapshot.data!.docs[i].get('openAnswer');
                   score = snapshot.data!.docs[i].get('result');
+                  timesLeft = snapshot.data!.docs[i].get('timesLeft');
                 }
               }
               return ListView.builder(
@@ -98,7 +100,20 @@ class GradeWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Text("Result: " + score.toString()),
+                      Text(
+                        "Result: " + score.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                            fontSize: 19),
+                      ),
+                      Text(
+                        "Times left: " + timesLeft.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.red,
+                            fontSize: 19),
+                      ),
                       GradeOpenTile(
                         openQuestionAnswer: openQuestionAnswer,
                         student: student,
@@ -112,7 +127,9 @@ class GradeWidget extends StatelessWidget {
                         codeCorrectionAnswer: codeCorrectionQuestionAnswer,
                         student: student,
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(
+                        height: 25,
+                      ),
                       saveButton,
                     ],
                   );
