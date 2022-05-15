@@ -23,12 +23,10 @@ class _StudentListState extends State<StudentList> {
     final stulist = [];
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
-        // if (stulist.contains(stu)) {
         stulist.add(stu);
         DatabaseService(uid: stu).updateStudentData(stu, "question",
-            "openanswer", "codecoransw", "multiplAnswer", 10, "lat", "longlat");
+            "openanswer", "codecoransw", "multiplAnswer", 10, "37.4219983", "-122.084");
       }
-      //}
     }
     for (int i = 0; i < stulist.length; i++) {
       return ListView.builder(
