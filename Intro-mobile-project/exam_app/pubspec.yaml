@@ -32,7 +32,7 @@ dependencies:
 
   flutter_map: any
   # geocoding: ^2.0.4
-  # geocoder: ^0.2.1
+  geocoder: ^0.2.1
   # tuple: ^1.0.2
   latlong: ^0.6.1
   # positioned_tap_detector_2: ^1.0.0

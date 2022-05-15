@@ -2,6 +2,7 @@ import 'package:exam_app/models/my_student.dart';
 import 'package:exam_app/screens/students/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,14 @@ class LocationOnMap extends StatefulWidget {
 
   @override
   State<LocationOnMap> createState() => _LocationOnMapState();
+
+    _getLocation() async
+      {
+        final coordinates = new Coordinates(51.3012, 4.4891);
+        var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+        var first = addresses.first;
+        print("${first.featureName} : ${first.addressLine}");
+      }
 }
 
 class _LocationOnMapState extends State<LocationOnMap> {
