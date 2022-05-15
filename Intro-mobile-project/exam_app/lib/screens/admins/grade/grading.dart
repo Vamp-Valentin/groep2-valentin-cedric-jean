@@ -13,7 +13,7 @@ class Grading{
 
   Future<int> gradeQuestion(String answer, String studentAnswer, int points) async {
     int result = 0;
-    if (identical(answer, studentAnswer)){
+    if (answer == studentAnswer){
       result += points;
     }
     return result;
