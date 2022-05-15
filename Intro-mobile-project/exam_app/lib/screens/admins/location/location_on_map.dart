@@ -14,7 +14,7 @@ class LocationOnMap extends StatefulWidget {
   @override
   State<LocationOnMap> createState() => _LocationOnMapState();
 
-    _getLocation() async
+    _locationToAdress() async
       {
         final coordinates = new Coordinates(51.3012, 4.4891);
         var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
