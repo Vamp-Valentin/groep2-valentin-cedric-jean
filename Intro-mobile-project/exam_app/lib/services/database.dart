@@ -170,9 +170,9 @@ class DatabaseService {
     });
   }
 
-  Future updateGrading(int result, int startScore) async {
+  Future updateGrading(int result) async {
     return await studentCollection.doc(uid).update({
-      'result': startScore += result,
+      'result': result,
     });
   }
 

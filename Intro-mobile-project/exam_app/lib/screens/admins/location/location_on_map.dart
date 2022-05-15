@@ -30,8 +30,8 @@ class LocationOnMap extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Results())),
+            onPressed: ()  async => Navigator.pushReplacement(
+                await context, await MaterialPageRoute(builder: (context) => Results())),
           ),
           backgroundColor: Colors.red,
           title: Text("Location"),

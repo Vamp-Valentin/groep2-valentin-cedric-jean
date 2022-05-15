@@ -31,16 +31,16 @@ class AutoGrade extends StatelessWidget {
                   multiplechoiseAnswer = snapshot.data!.docs[i].get('multipleChoiseAnswer');
               }
               debugPrint("score: " + score.toString());
-              debugPrint("total: " + score.toString());
+              debugPrint("total: " + total.toString());
               total = grading.gradeQuestion(codeCorrectionAnswer, codeCorrectionStudentAnswer, score);
               debugPrint("score: " + score.toString());
-              debugPrint("total: " + score.toString());
+              debugPrint("total: " + total.toString());
               total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, total);
               debugPrint("score: " + score.toString());
-              debugPrint("total: " + score.toString());
+              debugPrint("total: " + total.toString());
               
               
-              DatabaseService(uid: student).updateGrading(total, score);
+              DatabaseService(uid: student).updateGrading(total + score);
               return Results();
             }),
       ),
