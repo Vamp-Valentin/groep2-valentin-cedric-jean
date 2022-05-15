@@ -16,34 +16,17 @@ import 'package:flutter/material.dart';
 
 import '../../admins/questions/question_home.dart';
 
-class Home extends StatefulWidget {
-  //const Home({Key? key}) : super(key: key);
+class HomeStudent extends StatelessWidget {
+  const HomeStudent({Key? key, required this.student, this.toggleView})
+      : super(key: key);
+  final String student;
   final toggleView;
-  const Home({Key? key, this.toggleView}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final AuthService _auth = AuthService();
-  User? user = FirebaseAuth.instance.currentUser;
-  MyUser loggedInUser = MyUser();
-
-  @override
-  void initState() {
-    super.initState();
-    if (user?.uid != null) {
-      FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then(
-          (value) => {
-                this.loggedInUser = MyUser.fromMap(value.data()),
-                setState(() {})
-              });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = AuthService();
+    User? user = FirebaseAuth.instance.currentUser;
+    MyUser loggedInUser = MyUser();
     //startexam button
     final examButton = Material(
       elevation: 5,
@@ -54,7 +37,7 @@ class _HomeState extends State<Home> {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => CompleteExam()));
+              MaterialPageRoute(builder: (context) => CompleteExam(student: student,)));
         },
         child: const Text(
           "Start exam",
@@ -74,34 +57,103 @@ class _HomeState extends State<Home> {
               label: Text("Logout"),
               onPressed: () async {
                 //logout(context);
-                _auth.signOut();
-              })
-        ],
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 180,
-                child: Image.asset(
-                  "assets/apLogo.png",
-                  fit: BoxFit.contain,
+                _auth.signOut();}
                 ),
-              ),
               SizedBox(
                 height: 10,
               ),
               examButton,
             ],
           ),
-        ),
-      ),
-    );
+        );
   }
+
+// class Home extends StatefulWidget {
+//   //const Home({Key? key}) : super(key: key);
+//   final toggleView;
+//   const Home({Key? key, this.toggleView}) : super(key: key);
+
+//   @override
+//   State<Home> createState() => _HomeState();
+// }
+
+// class _HomeState extends State<Home> {
+  // final AuthService _auth = AuthService();
+  // User? user = FirebaseAuth.instance.currentUser;
+  // MyUser loggedInUser = MyUser();
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     if(user?.uid != null){
+//     FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then(
+//         (value) => {
+//               this.loggedInUser = MyUser.fromMap(value.data()),
+//               setState(() {})
+//             });
+//   }}
+
+//   @override
+//   Widget build(BuildContext context) {
+//     //startexam button
+//     final examButton = Material(
+//       elevation: 5,
+//       borderRadius: BorderRadius.circular(30),
+//       color: Colors.redAccent,
+//       child: MaterialButton(
+//         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+//         minWidth: MediaQuery.of(context).size.width,
+//         onPressed: ()async {
+//           Navigator.of(context).pushReplacement(
+//                MaterialPageRoute(builder: (context) => CompleteExam()));
+//         },
+//         child: Text(
+//           "Start exam",
+//           textAlign: TextAlign.center,
+//           style: TextStyle(
+//               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+//         ),
+//       ),
+//     );
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Colors.red,
+//         title: Text("Welcome"),
+//         centerTitle: true,
+//         actions: <Widget>[
+//           ActionChip(
+//               label: Text("Logout"),
+//               onPressed: () async{
+//                 //logout(context);
+//                 _auth.signOut();
+//               })
+//         ],
+//       ),
+//       body: Center(
+//         child: Padding(
+//           padding: EdgeInsets.all(20),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: <Widget>[
+//               SizedBox(
+//                 height: 180,
+//                 child: Image.asset(
+//                   "assets/apLogo.png",
+//                   fit: BoxFit.contain,
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 10,
+//               ),
+//               examButton,
+
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();

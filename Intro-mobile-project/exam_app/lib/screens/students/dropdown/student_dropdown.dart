@@ -7,10 +7,11 @@ import 'package:exam_app/screens/students/location/location.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class StudentDropdown extends StatefulWidget {
-  StudentDropdown({Key? key, this.student}) : super(key: key);
 
-  final String? student;
+class StudentDropdown extends StatefulWidget {
+  StudentDropdown({Key? key}) : super(key: key);
+
+  //final String? student;
 
   @override
   _StudentDropdownState createState() => _StudentDropdownState();
@@ -20,9 +21,6 @@ class _StudentDropdownState extends State<StudentDropdown> {
   var students, carMakeModel;
   var setDefaultMake = true, setDefaultMakeModel = true;
   LocationFunc loc = LocationFunc();
-    // User? user = FirebaseAuth.instance.currentUser;
-    // MyUser loggedInUser = MyUser();
-    // MyExam exam = MyExam();
 
 
   @override
@@ -78,7 +76,7 @@ class _StudentDropdownState extends State<StudentDropdown> {
                     items: dropdownItems,
                     onChanged: (value) {
                                 Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+                          .pushReplacement(MaterialPageRoute(builder: (context) => HomeStudent(student: value.toString(),)));
                         
                       debugPrint('selected onchange: $value');
                       setState(

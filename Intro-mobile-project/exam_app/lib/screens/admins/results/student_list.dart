@@ -1,6 +1,8 @@
 import 'package:exam_app/models/my_exam.dart';
+import 'package:exam_app/screens/admins/grade/grade.dart';
 import 'package:exam_app/screens/admins/home/exam_tile.dart';
 import 'package:exam_app/screens/admins/location/location_on_map.dart';
+import 'package:exam_app/screens/admins/results/show_result.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,23 +19,13 @@ class _StudentListState extends State<StudentList> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController editResult = TextEditingController();
     final exams = Provider.of<List<MyExam>>(context);
     final stulist = [];
     for (var ex in exams) {
       for (var stu in splitStudents(ex.students.toString())) {
-        // if (stulist.contains(stu)) {
-          stulist.add(stu);
-          DatabaseService(uid: stu).updateStudentData(
-              stu,
-              "question",
-              "openanswer",
-              "codecoransw",
-              "multiplAnswer",
-              10,
-              "lat",
-              "longlat");
-        }
-      //}
+        stulist.add(stu);
+      }
     }
     for (int i = 0; i < stulist.length; i++) {
       return ListView.builder(
@@ -48,14 +40,28 @@ class _StudentListState extends State<StudentList> {
             ),
             title: Text(stulist[index]),
             trailing: Wrap(children: [
-              TextButton(
-                  child: Text("Location"),
+              //Expanded(child: ShowResult(student: stulist[index])),
+              IconButton(
+                  icon: Icon(Icons.map_sharp),
                   onPressed: () async {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LocationOnMap()));
+                        builder: (context) => LocationOnMap(student: stulist[index].toString())));
                   }),
-              Icon(Icons.keyboard_arrow_right),
+              IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () async {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => GradeWidget(student: stulist[index].toString())));
+                  }),
             ]),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.black,
+              ),
+              borderRadius: BorderRadius.zero,
+            ),
+            selected: true,
+            selectedTileColor: Colors.grey[300],
           );
         },
       );
