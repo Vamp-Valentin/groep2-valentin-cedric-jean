@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class GradeCodeCorrectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    String codeCorrectionQuestion = "";
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -24,11 +25,22 @@ class GradeCodeCorrectionTile extends StatelessWidget {
                 title: Text("code correction question"),
                 tileColor: Colors.grey,
               ),
-              ListTile(
-                leading: Icon(Icons.question_mark_outlined),
-                title: Text("Print("");"),
-                tileColor: Colors.redAccent,
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('exams')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                      codeCorrectionQuestion = snapshot.data!.docs[i].get('codeCorrectionQuestionWrong');
+                    }
+                    return ListTile(
+                      leading: Icon(Icons.question_mark_outlined),
+                      title: Text(codeCorrectionQuestion),
+                      tileColor: Colors.redAccent,
+                    );
+                  }),
               ListTile(
                 leading: Icon(Icons.check),
                 title: Text(codeCorrectionAnswer.toString()),

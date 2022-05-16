@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/screens/admins/results/results.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class GradeOpenTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    String openQuestion = "";
     final gradeField = TextFormField(
       autofocus: false,
       controller: editResult,
@@ -37,7 +38,8 @@ class GradeOpenTile extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
-          DatabaseService(uid: student).updateGrading(int.parse(editResult.text));
+          DatabaseService(uid: student)
+              .updateGrading(int.parse(editResult.text));
         },
         child: Text(
           "save",
@@ -47,7 +49,6 @@ class GradeOpenTile extends StatelessWidget {
         ),
       ),
     );
-
 
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
@@ -60,11 +61,22 @@ class GradeOpenTile extends StatelessWidget {
                 title: Text("Open question"),
                 tileColor: Colors.grey,
               ),
-              ListTile(
-                leading: Icon(Icons.question_mark_outlined),
-                title: Text("Hoe gaat het?"),
-                tileColor: Colors.redAccent,
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('exams')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                      openQuestion = snapshot.data!.docs[i].get('openQuestion');
+                    }
+                    return ListTile(
+                      leading: Icon(Icons.question_mark_outlined),
+                      title: Text(openQuestion),
+                      tileColor: Colors.redAccent,
+                    );
+                  }),
               ListTile(
                 leading: Icon(Icons.check),
                 title: Text(openQuestionAnswer.toString()),

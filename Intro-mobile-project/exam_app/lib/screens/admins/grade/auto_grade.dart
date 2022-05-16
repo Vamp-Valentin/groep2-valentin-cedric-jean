@@ -30,14 +30,8 @@ class AutoGrade extends StatelessWidget {
                   codeCorrectionAnswer = snapshot.data!.docs[i].get('codeCorrectionQuestionCorrect');
                   multiplechoiseAnswer = snapshot.data!.docs[i].get('multipleChoiseAnswer');
               }
-              debugPrint("score: " + score.toString());
-              debugPrint("total: " + total.toString());
               total = grading.gradeQuestion(codeCorrectionAnswer, codeCorrectionStudentAnswer, score);
-              debugPrint("score: " + score.toString());
-              debugPrint("total: " + total.toString());
               total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, score);
-              debugPrint("score: " + score.toString());
-              debugPrint("total: " + total.toString());
               
               
               DatabaseService(uid: student).updateGrading(total + score);

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exam_app/services/database.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class GradeMultipleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String multipleChoiseQuestion = "";
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -19,11 +21,22 @@ class GradeMultipleTile extends StatelessWidget {
                 title: Text("Multiple choise question"),
                 tileColor: Colors.grey,
               ),
-              ListTile(
-                leading: Icon(Icons.question_mark_outlined),
-                title: Text("Wat is je favoriete dier?"),
-                tileColor: Colors.redAccent,
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('exams')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                      multipleChoiseQuestion = snapshot.data!.docs[i].get('multipleChoiseQuestion');
+                    }
+                    return ListTile(
+                      leading: Icon(Icons.question_mark_outlined),
+                      title: Text(multipleChoiseQuestion),
+                      tileColor: Colors.redAccent,
+                    );
+                  }),
               ListTile(
                 leading: Icon(Icons.check),
                 title: Text(multipleChoiseAnswer.toString()),
