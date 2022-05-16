@@ -81,8 +81,29 @@ class CompleteExam extends StatelessWidget {
       ),
     );
 
+    //time button
+    final timeButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.redAccent,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => TimerWidget()));
+        },
+        child: const Text(
+          "check time",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return Scaffold(
-      //appBar: AppBar(title: Text("exam"),actions: [TimerWidget()],),
+      //appBar: AppBar(title: Text("exam"),actions: [timeButton],),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
