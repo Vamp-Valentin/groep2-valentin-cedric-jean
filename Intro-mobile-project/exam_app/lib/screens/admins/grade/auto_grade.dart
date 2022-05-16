@@ -35,7 +35,7 @@ class AutoGrade extends StatelessWidget {
               total = grading.gradeQuestion(codeCorrectionAnswer, codeCorrectionStudentAnswer, score);
               debugPrint("score: " + score.toString());
               debugPrint("total: " + total.toString());
-              total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, total);
+              total += grading.gradeQuestion(multiplechoiseAnswer, multipleChoiseStudentAnswer, score);
               debugPrint("score: " + score.toString());
               debugPrint("total: " + total.toString());
               

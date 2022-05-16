@@ -64,14 +64,11 @@ class CompleteExam extends StatelessWidget {
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
           DatabaseService(uid: student).updateAnswers(
-              answerOneFieldController.text,
               answerTwoFieldController.text,
+              answerOneFieldController.text,
               answerThreeFieldController.text);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => FinishedExam(student: student,)));
-              // context,
-              // MaterialPageRoute(
-              //     builder: (context) => HomeStudent(student: student)));
         },
         child: const Text(
           "save",

@@ -14,6 +14,8 @@ class Grading{
   int gradeQuestion(String answer, String studentAnswer, int result) {
     if (answer == studentAnswer){
       result = 1;
+    }else{
+      result = 0;
     }
     return result;
   }
