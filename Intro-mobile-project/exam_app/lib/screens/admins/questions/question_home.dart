@@ -168,6 +168,7 @@ class _MainQuestionsState extends State<MainQuestions> {
         minWidth: MediaQuery.of(context).size.width / 3,
         onPressed: () async {
           DatabaseService(uid: user.uid).updateExamName(examNameEditingController.text);
+          DatabaseService(uid: user.uid).updateTime(int.parse(timerEditingController.text));
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomeAdmin()));
         },

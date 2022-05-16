@@ -68,12 +68,6 @@ class _TimerWidgetState extends State<TimerWidget> {
               if (!snapshot.hasData) return Text("");
               minute = snapshot.data!.docs[0].get('timer');
               String minutes = strDigits(myDuration.inMinutes.remainder(minute));
-              // return ListTile(
-              //   leading: Icon(Icons.flaky_outlined),
-              //   title: Text('$hours:$minutes:$seconds'),
-              //   tileColor: Colors.grey,
-              // );
-              //return Text('$hours:$minutes:$seconds');
               return Text(
                   '$hours:$minutes:$seconds',
                   style: TextStyle(
